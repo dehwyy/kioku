@@ -1,0 +1,7 @@
+{
+  "arrowParens": "avoid",
+  "bracketSameLine": true,
+  "trailingComma": "all",
+  "jsxBracketSameLine": true,
+  "semi": false
+}
