@@ -14,10 +14,11 @@ const Wrapper: FC<wrapperProps> = ({ children, font }) => {
       sx={{
         height: "100vh",
         width: "100vw",
-        color: "text.secondary",
       }}>
       <Navbar />
-      {children}
+      <Box pt="80px" minWidth="500px" maxWidth="1024px" m="0 auto">
+        {children}
+      </Box>
     </Box>
   )
 }

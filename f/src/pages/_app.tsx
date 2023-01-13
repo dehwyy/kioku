@@ -13,28 +13,24 @@ const ff = Font({
 const ssm = Spline_Sans_Mono({
   style: "normal",
 })
-const theme = createTheme({
+const defaultTheme = createTheme({
   palette: {
-    text: {
-      primary: "#FFF",
-      secondary: "#696969",
+    primary: {
+      main: "#97caef",
+      contrastText: "#696969",
     },
-  },
-  typography: {
-    subtitle2: {
-      fontSize: "1.2em",
-      transition: "0.2s ease",
-      textAlign: "center",
-      "&:hover": {
-        cursor: "pointer",
-        color: "#0288d1",
-      },
+    secondary: {
+      main: "#55bcc9",
+      contrastText: "#222222",
+    },
+    info: {
+      main: "#3a5199",
     },
   },
 })
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={defaultTheme}>
       <Wrapper font={ff.className}>
         <Component {...pageProps} />
       </Wrapper>

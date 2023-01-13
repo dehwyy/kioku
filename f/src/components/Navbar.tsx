@@ -1,50 +1,70 @@
-import React from "react"
-import {
-  AppBar,
-  Box,
-  Button,
-  Grid,
-  styled,
-  Toolbar,
-  Typography,
-} from "@mui/material"
-import Link from "next/link"
+import React, { useState } from "react"
+import { AppBar, Button, Divider, Grid, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, SwipeableDrawer, useMediaQuery } from "@mui/material"
+import { Menu, Collections, CardGiftcard, Person } from "@mui/icons-material"
 import localFont from "@next/font/local"
-const LogoFont = localFont({ src: "../fonts/logo-font.otf" })
+import { useRouter } from "next/router"
 
-const CustomToolbar = styled(Toolbar)`
-  background-color: white;
-  height: max-content;
-  font-weight: 700;
-  color: ${props => props.theme.palette.text.secondary};
-  display: flex;
-  align-items: center;
-`
+const LogoFont = localFont({ src: "../fonts/BARTKEY.ttf" })
 
-const CustomLogo = styled(Typography)`
-  font-size: 2em;
-  user-select: none;
-  position: relative;
-  top: -3.5px;
-  &:hover {
-    color: ${props => props.theme.palette.text.secondary};
-  }
-`
 const Navbar = () => {
+  const router = useRouter()
+  const mediaQuery768 = useMediaQuery("(min-width:768px)")
+  const [isDrawer, setDrawer] = useState(true)
   return (
-    <AppBar position="static">
-      <CustomToolbar variant="dense">
-        <Link
-          href={"/cards"}
-          style={{
-            marginRight: "auto",
-          }}>
-          <CustomLogo variant="subtitle2" className={LogoFont.className}>
-            UseMemorize
-          </CustomLogo>
-        </Link>
-        <Typography variant="subtitle2">Photos</Typography>
-      </CustomToolbar>
+    <AppBar position="fixed">
+      <Grid sx={{ "& > div": { cursor: "pointer" }, "& button": { color: "primary.contrastText" } }} container columnGap="15px" justifyContent="space-between" height="80px" alignItems="center" minWidth="500px" maxWidth="1024px" m="0 auto" p="0 15px">
+        {mediaQuery768 ? (
+          <>
+            <Grid item className={LogoFont.className} fontWeight="600" fontSize="30px" letterSpacing="10px" sx={{ color: "primary.contrastText", textShadow: "1px 0.5px 0 #222222", pl: 0, userSelect: "none" }} onClick={() => router.push("/")}>
+              useMemorize
+            </Grid>
+            <Grid item ml="auto">
+              <Button startIcon={<Collections />}>Collections</Button>
+            </Grid>
+            <Grid item>
+              <Button startIcon={<CardGiftcard />}>Cards</Button>
+            </Grid>
+            <Grid item onClick={() => router.push("/user/1")}>
+              <Button startIcon={<Person />}>Profile</Button>
+            </Grid>
+          </>
+        ) : (
+          <Grid>
+            <IconButton
+              edge="start"
+              sx={{ mr: 2, ml: 0 }}
+              onClick={e => {
+                e.preventDefault()
+                setDrawer(true)
+              }}>
+              <Menu />
+            </IconButton>
+            <SwipeableDrawer anchor={"left"} open={isDrawer} onClose={() => setDrawer(false)} onOpen={() => setDrawer(true)}>
+              <List>
+                <ListItem>
+                  <ListItemText sx={{ "& > span": { fontSize: "5vw", color: "secondary.contrastText", cursor: "pointer", fontFamily: LogoFont.style } }}>UseMemorize</ListItemText>
+                </ListItem>
+                <Divider />
+                <ListItem sx={{ mt: "-5px", pb: 0 }}>
+                  <ListItemButton>
+                    <ListItemText sx={{ "& > span": { fontSize: "4vw" } }}>Profile</ListItemText>
+                  </ListItemButton>
+                </ListItem>
+                <ListItem sx={{ mt: "-5px", pb: 0 }}>
+                  <ListItemButton>
+                    <ListItemText sx={{ "& > span": { fontSize: "4vw" } }}>Cards</ListItemText>
+                  </ListItemButton>
+                </ListItem>
+                <ListItem sx={{ mt: "-5px", pb: 0 }}>
+                  <ListItemButton>
+                    <ListItemText sx={{ "& > span": { fontSize: "4vw" } }}>Collections</ListItemText>
+                  </ListItemButton>
+                </ListItem>
+              </List>
+            </SwipeableDrawer>
+          </Grid>
+        )}
+      </Grid>
     </AppBar>
   )
 }
