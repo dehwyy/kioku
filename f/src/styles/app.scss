@@ -1,9 +1,25 @@
 * {
   padding: 0;
   margin: 0;
-  box-sizing: border-box;
   font-size: 20px;
-  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(0deg, rgba(255,193,129,1) 0%, rgba(254,249,199,1) 50%, rgba(159,237,215,1) 100%);
+}
+
+::-webkit-scrollbar {
+  width: 1vw;
+}
+::-webkit-scrollbar-track {
+  background: #444444;
+}
+::-webkit-scrollbar-thumb {
+  background: gray;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #545454;
 }
 
 a {

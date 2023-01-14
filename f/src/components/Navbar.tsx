@@ -8,21 +8,21 @@ const LogoFont = localFont({ src: "../fonts/BARTKEY.ttf" })
 
 const Navbar = () => {
   const router = useRouter()
-  const mediaQuery768 = useMediaQuery("(min-width:768px)")
+  const mediaQuery967 = useMediaQuery("(min-width:967px)")
   const [isDrawer, setDrawer] = useState(true)
   return (
-    <AppBar position="fixed">
-      <Grid sx={{ "& > div": { cursor: "pointer" }, "& button": { color: "primary.contrastText" } }} container columnGap="15px" justifyContent="space-between" height="80px" alignItems="center" minWidth="500px" maxWidth="1024px" m="0 auto" p="0 15px">
-        {mediaQuery768 ? (
+    <AppBar position="fixed" sx={{ backgroundColor: "primary.light" }}>
+      <Grid sx={{ "& > div": { cursor: "pointer" }, "& button": { color: "primary.contrastText" } }} container columnGap="15px" justifyContent="space-between" height="80px" alignItems="center" minWidth="500px" maxWidth="1400px" m="0 auto" p="0 15px">
+        {mediaQuery967 ? (
           <>
-            <Grid item className={LogoFont.className} fontWeight="600" fontSize="30px" letterSpacing="10px" sx={{ color: "primary.contrastText", textShadow: "1px 0.5px 0 #222222", pl: 0, userSelect: "none" }} onClick={() => router.push("/")}>
+            <Grid item className={LogoFont.className} fontWeight="400" fontSize="30px" letterSpacing="10px" sx={{ color: "primary.contrastText", textShadow: "0.5px 0.5px 0 #222222", pl: 0, userSelect: "none" }} onClick={() => router.push("/")}>
               useMemorize
             </Grid>
             <Grid item ml="auto">
-              <Button startIcon={<Collections />}>Collections</Button>
+              <Button startIcon={<Collections />}>Popular collections</Button>
             </Grid>
             <Grid item>
-              <Button startIcon={<CardGiftcard />}>Cards</Button>
+              <Button startIcon={<CardGiftcard />}>Favourite cards</Button>
             </Grid>
             <Grid item onClick={() => router.push("/user/1")}>
               <Button startIcon={<Person />}>Profile</Button>
