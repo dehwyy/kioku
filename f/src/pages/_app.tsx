@@ -41,7 +41,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <title>useMemorize</title>
-        <meta name="viewport" content="width=900, initial-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
       <ThemeProvider theme={defaultTheme}>
         <Wrapper font={ff.className}>

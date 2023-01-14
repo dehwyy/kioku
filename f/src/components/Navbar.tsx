@@ -3,29 +3,35 @@ import { AppBar, Button, Divider, Grid, IconButton, List, ListItem, ListItemButt
 import { Menu, Collections, CardGiftcard, Person } from "@mui/icons-material"
 import localFont from "@next/font/local"
 import { useRouter } from "next/router"
+import Link from "next/link"
 
-const LogoFont = localFont({ src: "../fonts/BARTKEY.ttf" })
+const LogoFont2 = localFont({ src: "../fonts/BARTKEY.ttf" })
+const LogoFont = localFont({ src: "../fonts/aquire-bold.otf" })
 
 const Navbar = () => {
   const router = useRouter()
-  const mediaQuery967 = useMediaQuery("(min-width:967px)")
+  const mediaQuery994 = useMediaQuery("(min-width:994px)")
   const [isDrawer, setDrawer] = useState(true)
   return (
     <AppBar position="fixed" sx={{ backgroundColor: "primary.light" }}>
       <Grid sx={{ "& > div": { cursor: "pointer" }, "& button": { color: "primary.contrastText" } }} container columnGap="15px" justifyContent="space-between" height="80px" alignItems="center" minWidth="500px" maxWidth="1400px" m="0 auto" p="0 15px">
-        {mediaQuery967 ? (
+        {mediaQuery994 ? (
           <>
-            <Grid item className={LogoFont.className} fontWeight="400" fontSize="30px" letterSpacing="10px" sx={{ color: "primary.contrastText", textShadow: "0.5px 0.5px 0 #222222", pl: 0, userSelect: "none" }} onClick={() => router.push("/")}>
-              useMemorize
+            <Grid item className={LogoFont.className} fontWeight="400" fontSize="30px" letterSpacing="10px" sx={{ color: "primary.contrastText", textShadow: "0.5px 0.5px 0 #222222", pl: 0, userSelect: "none" }}>
+              <Link href="/">useMemorize</Link>
             </Grid>
             <Grid item ml="auto">
-              <Button startIcon={<Collections />}>Popular collections</Button>
+              <Button startIcon={<Collections />}>
+                <Link href={"/popularCollections"}>Popular collections</Link>
+              </Button>
             </Grid>
             <Grid item>
               <Button startIcon={<CardGiftcard />}>Favourite cards</Button>
             </Grid>
-            <Grid item onClick={() => router.push("/user/1")}>
-              <Button startIcon={<Person />}>Profile</Button>
+            <Grid item>
+              <Button startIcon={<Person />}>
+                <Link href={"/user/1"}>Profile</Link>
+              </Button>
             </Grid>
           </>
         ) : (

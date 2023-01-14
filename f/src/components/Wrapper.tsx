@@ -18,12 +18,11 @@ const Wrapper: FC<wrapperProps> = ({ children, font }) => {
       display="flex"
       flexDirection="column"
       sx={{
-        height: "100vh",
         width: "100vw",
         overflowX: "hidden",
       }}>
       {notIsLoginForm && <Navbar />}
-      <Box p="80px 50px 0" minWidth="300px" maxWidth="1024px" m="0 auto" display="flex" flex="1 1 auto" flexDirection="column">
+      <Box p="80px 0 0" minWidth="300px" maxWidth="1024px" m="0 auto" display="flex" flex="1 1 auto" flexDirection="column">
         {!notIsLoginForm ? (
           children
         ) : (

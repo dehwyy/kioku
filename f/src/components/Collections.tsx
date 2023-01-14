@@ -6,7 +6,6 @@ import localFont from "@next/font/local"
 const LogoFont = localFont({ src: "../fonts/galey-r.ttf" })
 const FieldFont = localFont({ src: "../fonts/gp-reg.otf" })
 const FieldFont2 = localFont({ src: "../fonts/gravitica.otf" })
-const FieldFont3 = localFont({ src: "../fonts/Aquire.otf" })
 const Collections = () => {
   const col = [
     { id: 1, title: "JAPANESE", author: "dehwyy", theme: "aloha", wordsCount: 123 },
