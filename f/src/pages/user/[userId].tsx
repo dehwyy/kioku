@@ -6,10 +6,11 @@ import Collections from "../../components/Collections"
 import Cards from "../../components/Cards"
 import { useInView } from "react-intersection-observer"
 import localFont from "@next/font/local"
+import CardsWrapper from "../../components/Cards"
 type TabsValuesT = "collections" | "cards" | "three"
 
 const LogoFont = localFont({ src: "../../fonts/galey-r.ttf" })
-const Id = () => {
+const UserId = () => {
   const { query } = useRouter()
   const [value, setValue] = useState<TabsValuesT>("collections")
   const profileImage = "https://cdn.icon-icons.com/icons2/2406/PNG/512/user_account_icon_145918.png"
@@ -37,9 +38,9 @@ const Id = () => {
           </Tabs>
         </Box>
       </Box>
-      {value === "collections" ? <Collections /> : value === "cards" ? <Cards /> : <>empty</>}
+      {value === "collections" ? <Collections /> : value === "cards" ? <CardsWrapper /> : <>empty</>}
     </Box>
   )
 }
 
-export default Id
+export default UserId

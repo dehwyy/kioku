@@ -3,12 +3,17 @@
   margin: 0;
   font-size: 20px;
   box-sizing: border-box;
+
 }
 
+html {
+  width: 100vw;
+  height: max-content;
+}
 
 body {
   overflow-x: hidden;
-  background: linear-gradient(0deg, rgba(255,193,129,1) 0%, rgba(254,249,199,1) 50%, rgba(159,237,215,1) 100%);
+  background: linear-gradient(0deg, rgba(255,193,129,1) 0%, rgba(254,249,199,1) 50%, rgba(159,237,215,1) 100%) no-repeat;
 }
 
 ::-webkit-scrollbar {
@@ -26,6 +31,7 @@ body {
 
 a {
   text-decoration: none ;
+  font-size: inherit;
   &:visited {
     color: inherit;
   }

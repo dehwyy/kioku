@@ -1,10 +1,10 @@
 import React from "react"
-import Collections from "../components/Collections"
 import { Box, Typography } from "@mui/material"
-import localFont from "@next/font/local"
+import CardsWrapper from "../components/Cards"
 import { useInView } from "react-intersection-observer"
+import localFont from "@next/font/local"
 const FieldFont2 = localFont({ src: "../fonts/aquire-bold.otf", display: "swap" })
-const PopularCollections = () => {
+const Cards = () => {
   const { ref, inView } = useInView({
     triggerOnce: true,
     delay: 1500,
@@ -15,11 +15,11 @@ const PopularCollections = () => {
   return (
     <Box ref={ref} sx={styleTransition(inView)}>
       <Typography align="center" sx={{ m: "50px 0" }} fontSize="2rem" fontWeight="400" style={FieldFont2.style}>
-        Collections
+        Quiz-cards
       </Typography>
-      <Collections />
+      <CardsWrapper />
     </Box>
   )
 }
 
-export default PopularCollections
+export default Cards

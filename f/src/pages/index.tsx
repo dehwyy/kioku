@@ -3,9 +3,8 @@ import { Box, Slide, Typography } from "@mui/material"
 import { useInView } from "react-intersection-observer"
 import localFont from "@next/font/local"
 import Image from "next/image"
-
-const LogoFont = localFont({ src: "../fonts/galey-r.ttf" })
-const LogoFont2 = localFont({ src: "../fonts/aquire.otf" })
+const LogoFont = localFont({ src: "../fonts/galey-r.ttf", display: "swap" })
+const LogoFont2 = localFont({ src: "../fonts/aquire-bold.otf", display: "swap" })
 const Index = () => {
   const { ref, inView } = useInView({
     triggerOnce: true,
@@ -20,7 +19,7 @@ const Index = () => {
     <Box mt="50px" p="50px 0 0" borderRadius="10px 10px 0 0">
       <Box ref={ref} sx={styleTransition(inView)} pb="50px">
         <Box textAlign="center">
-          <Typography style={LogoFont2.style} fontSize="3.2rem" fontWeight="600" sx={{ color: "secondary.contrastText" }}>
+          <Typography style={LogoFont2.style} fontSize="3.2rem" sx={{ color: "secondary.contrastText" }}>
             UseMemorize
           </Typography>
           <Typography fontSize="1rem" fontWeight="600" style={LogoFont.style} sx={{ color: "primary.contrastText" }} pb="10px">
