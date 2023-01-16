@@ -1,8 +1,9 @@
 import React from "react"
-import { Box, Slide, Typography } from "@mui/material"
+import { Box, Button, Slide, Typography } from "@mui/material"
 import { useInView } from "react-intersection-observer"
 import localFont from "@next/font/local"
 import Image from "next/image"
+import { useRouter } from "next/router"
 const LogoFont = localFont({ src: "../fonts/galey-r.ttf", display: "swap" })
 const LogoFont2 = localFont({ src: "../fonts/aquire-bold.otf", display: "swap" })
 const Index = () => {
@@ -14,6 +15,7 @@ const Index = () => {
   const { ref: ref2, inView: inView2 } = useInView({
     triggerOnce: true,
   })
+  const router = useRouter()
   const styleTransition = prop => ({ transition: "1s ease", transform: prop ? "translateY(0)" : "translateY(25px)", opacity: inView ? "1" : "0" })
   return (
     <Box mt="50px" p="50px 0 0" borderRadius="10px 10px 0 0">
@@ -33,8 +35,11 @@ const Index = () => {
           <Typography style={LogoFont.style} fontSize="3rem" fontWeight="600" sx={{ color: "secondary.contrastText" }}>
             Inspiration
           </Typography>
-          <Typography fontSize="1rem" fontWeight="600" style={LogoFont.style} sx={{ color: "primary.contrastText" }}>
+          <Typography component="div" display="flex" flexDirection="column" gap="15px" fontSize="1rem" fontWeight="600" style={LogoFont.style} sx={{ color: "primary.contrastText" }}>
             App was created mainly for me
+            <Button variant="contained" color="inherit" sx={{ alignSelf: "center" }} onClick={() => router.push("/login")}>
+              Sign up for free
+            </Button>
           </Typography>
         </Box>
       </Box>
