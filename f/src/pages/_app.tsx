@@ -30,7 +30,8 @@ const defaultTheme = createTheme({
       main: "#3a5199",
     },
     success: {
-      main: "rgb(86,230,44)",
+      main: "rgb(84,188,68)",
+      contrastText: "#fff",
     },
     warning: {
       main: "rgba(159,237,215,0.7)",

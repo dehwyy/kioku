@@ -34,7 +34,7 @@ const CardsWrapper = () => {
           <Typography style={FieldFont2.style} letterSpacing="3px" fontWeight="600" fontSize="1.5rem" sx={{ textDecoration: "underline 1.5px #222222" }}>
             {card.title}
           </Typography>
-          <Button variant="contained" color="warning" endIcon={<Forward />} style={FieldFont.style} onClick={() => router.push(router?.query?.quizCardId ? `${router.asPath}/${card.id}` : `${router.asPath}/${card.id}/${card.id}`)}>
+          <Button variant="contained" color="warning" endIcon={<Forward />} style={FieldFont.style} onClick={() => router.push(router?.query?.quizCardId ? `${router.asPath}/${card.id}` : router?.query?.userId ? `/cards/${card.id}/${card.id}` : `${router.asPath}/${card.id}/${card.id}`)}>
             learn
           </Button>
         </Box>
