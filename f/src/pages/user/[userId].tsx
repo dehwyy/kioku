@@ -31,7 +31,7 @@ const UserId = () => {
           <Typography pt="50px" style={LogoFont.style} fontWeight="600" fontSize="2rem">
             Username
           </Typography>
-          <Tabs value={value} onChange={handleChange} sx={{ pb: "25px" }}>
+          <Tabs value={value} onChange={handleChange} sx={{ pb: "25px" }} data-cy="profileTabs">
             <Tab value="collections" label="collections" />
             <Tab value="cards" label="cards" />
             <Tab value="three" label="<empty>" />

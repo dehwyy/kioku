@@ -13,7 +13,7 @@ const CardsWrapper = () => {
     { title: "Capitals of Africa", id: 4, wordsCount: 101, likes: 713 },
   ]
   return (
-    <Box display="flex" flexDirection="column" gap="25px">
+    <Box display="flex" flexDirection="column" gap="25px" data-cy="cardsCardsList">
       {QuizCards.map(card => (
         <Box key={card.id} p="30px" gap="50px" bgcolor="white" display="flex" justifyContent="space-between" alignItems="center" sx={{ boxShadow: "2px 2px 1px black", border: "2px solid #222222", borderRadius: "5px" }}>
           <Box textAlign="center">

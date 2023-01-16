@@ -9,23 +9,29 @@ const DefaultNav = () => {
   return (
     <>
       <Link href="/" className={LogoFont.className}>
-        <Grid item fontSize="30px" letterSpacing="10px" sx={{ color: "primary.contrastText", textShadow: "0.5px 0.5px 0 #222222", pl: 0, userSelect: "none" }}>
+        <Grid data-cy="rootPage" item fontSize="30px" letterSpacing="10px" sx={{ color: "primary.contrastText", textShadow: "0.5px 0.5px 0 #222222", pl: 0, userSelect: "none" }}>
           useMemorize
         </Grid>
       </Link>
       <Grid item ml="auto">
         <Link href={"/popularCollections"}>
-          <Button startIcon={<Collections />}>Popular collections</Button>
+          <Button data-cy="collectionsPage" startIcon={<Collections />}>
+            Popular collections
+          </Button>
         </Link>
       </Grid>
       <Grid item>
         <Link href={"/cards"}>
-          <Button startIcon={<CardGiftcard />}>Favourite cards</Button>
+          <Button data-cy="cardsPage" startIcon={<CardGiftcard />}>
+            Favourite cards
+          </Button>
         </Link>
       </Grid>
       <Grid item>
         <Link href={"/user/1"}>
-          <Button startIcon={<Person />}>Profile</Button>
+          <Button data-cy="profilePage" startIcon={<Person />}>
+            Profile
+          </Button>
         </Link>
       </Grid>
     </>

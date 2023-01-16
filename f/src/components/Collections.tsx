@@ -19,7 +19,7 @@ const Collections = () => {
   ]
   const router = useRouter()
   return (
-    <Grid container rowSpacing="5px" columnSpacing="5px" gap="50px 50px" justifyContent="center">
+    <Grid container rowSpacing="5px" columnSpacing="5px" gap="50px 50px" justifyContent="center" data-cy="collectionsWrapper">
       {col.map(card => (
         <Grid display="flex" flexDirection="column" justifyContent="space-between" p="10px" item key={card.id} xs={5} height="200px" style={{ border: "2px solid black", boxShadow: "2px 2px 1px #222222", borderRadius: "5px", backgroundColor: "rgba(255, 255, 255, 1)" }}>
           <Typography align="center" style={{ ...LogoFont.style, textDecoration: "underline 2px" }} fontWeight="600" fontSize="1.2rem">

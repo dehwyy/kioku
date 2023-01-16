@@ -13,6 +13,7 @@ const ff = Font({
 })
 const ssm = Spline_Sans_Mono({
   style: "normal",
+  subsets: ["latin"],
 })
 const defaultTheme = createTheme({
   palette: {
