@@ -2,6 +2,7 @@ import React from "react"
 import { Box, Button, Typography } from "@mui/material"
 import { FavoriteBorder, Forward } from "@mui/icons-material"
 import localFont from "@next/font/local"
+import { useRouter } from "next/router"
 
 const FieldFont = localFont({ src: "../fonts/gp-reg.otf" })
 const FieldFont2 = localFont({ src: "../fonts/galey-r.ttf" })
@@ -12,6 +13,8 @@ const CardsWrapper = () => {
     { title: "Python snippets", id: 3, wordsCount: 101, likes: 144 },
     { title: "Capitals of Africa", id: 4, wordsCount: 101, likes: 713 },
   ]
+  const router = useRouter()
+  console.log(router)
   return (
     <Box display="flex" flexDirection="column" gap="25px" data-cy="cardsCardsList">
       {QuizCards.map(card => (
@@ -31,7 +34,7 @@ const CardsWrapper = () => {
           <Typography style={FieldFont2.style} letterSpacing="3px" fontWeight="600" fontSize="1.5rem" sx={{ textDecoration: "underline 1.5px #222222" }}>
             {card.title}
           </Typography>
-          <Button variant="contained" color="warning" endIcon={<Forward />} style={FieldFont.style}>
+          <Button variant="contained" color="warning" endIcon={<Forward />} style={FieldFont.style} onClick={() => router.push(router?.query?.quizCardId ? `${router.asPath}/${card.id}` : `${router.asPath}/${card.id}/${card.id}`)}>
             learn
           </Button>
         </Box>

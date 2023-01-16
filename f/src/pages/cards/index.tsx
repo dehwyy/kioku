@@ -1,9 +1,9 @@
 import React from "react"
 import { Box, Typography } from "@mui/material"
-import CardsWrapper from "../components/Cards"
+import CardsWrapper from "../../components/Cards"
 import { useInView } from "react-intersection-observer"
 import localFont from "@next/font/local"
-const FieldFont2 = localFont({ src: "../fonts/aquire-bold.otf", display: "swap" })
+const FieldFont2 = localFont({ src: "../../fonts/aquire-bold.otf", display: "swap" })
 const Cards = () => {
   const { ref, inView } = useInView({
     triggerOnce: true,
@@ -15,7 +15,7 @@ const Cards = () => {
   return (
     <Box ref={ref} sx={styleTransition(inView)}>
       <Typography align="center" sx={{ m: "50px 0" }} fontSize="2rem" fontWeight="400" style={FieldFont2.style}>
-        Quiz-cards
+        Best quiz-cards
       </Typography>
       <CardsWrapper />
     </Box>

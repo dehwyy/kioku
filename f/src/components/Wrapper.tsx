@@ -22,25 +22,17 @@ const Wrapper: FC<wrapperProps> = ({ children, font }) => {
         overflowX: "hidden",
       }}>
       {notIsLoginForm && <Navbar />}
-      <Box p="80px 0 0" minWidth="300px" maxWidth="1024px" m="0 auto" display="flex" flex="1 1 auto" flexDirection="column">
-        {!notIsLoginForm ? (
-          children
-        ) : (
-          <>
-            <Box flex="1 1 auto" minHeight="800px">
-              {children}
-            </Box>
-            <Box textAlign="center" p="50px 0 15px 0">
-              <Box component="span" pr="10px">
-                Creator:
-              </Box>
-              <GitHub sx={{ position: "relative", top: "7px", right: "5px" }} />
-              <Link target="_blank" href="https://github.com/dehwyy">
-                dehwyy
-              </Link>
-            </Box>
-          </>
-        )}
+      <Box p="80px 0 0" minWidth="300px" maxWidth="1024px" m="0 auto">
+        {children}
+      </Box>
+      <Box textAlign="center" mt="auto" p="50px 0 15px 0">
+        <Box component="span" pr="10px">
+          Creator:
+        </Box>
+        <GitHub sx={{ position: "relative", top: "7px", right: "5px" }} />
+        <Link target="_blank" href="https://github.com/dehwyy">
+          dehwyy
+        </Link>
       </Box>
     </Box>
   )

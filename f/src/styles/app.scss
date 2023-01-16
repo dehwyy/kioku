@@ -13,8 +13,13 @@ html {
 }
 
 body {
-  overflow-x: hidden;
   background: linear-gradient(0deg, rgba(255,193,129,1) 0%, rgba(254,249,199,1) 50%, rgba(159,237,215,1) 100%) no-repeat;
+  overflow-x: hidden;
+  min-height: 100vh;
+  display: flex;
+  & > div:first-child {
+    display: flex;
+  }
 }
 
 ::-webkit-scrollbar {
