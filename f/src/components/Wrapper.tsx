@@ -1,6 +1,6 @@
 import React, { FC } from "react"
 import Navbar from "./Navbar"
-import { Box, Link, Typography } from "@mui/material"
+import { Box, Link } from "@mui/material"
 import { useRouter } from "next/router"
 import { GitHub } from "@mui/icons-material"
 

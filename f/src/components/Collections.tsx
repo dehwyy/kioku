@@ -1,12 +1,12 @@
 import React from "react"
-import { Box, Button, Container, Grid, Typography } from "@mui/material"
+import { Box, Button, Grid, Typography } from "@mui/material"
 import localFont from "@next/font/local"
 import { useRouter } from "next/router"
 import { Forward } from "@mui/icons-material"
 
 const LogoFont = localFont({ src: "../fonts/galey-r.ttf" })
 const FieldFont = localFont({ src: "../fonts/gp-reg.otf" })
-const FieldFont2 = localFont({ src: "../fonts/gravitica.otf" })
+const AuthorFont = localFont({ src: "../fonts/gravitica.otf" })
 const Collections = () => {
   const col = [
     { id: 1, title: "Japanese", author: "dehwyy", theme: "words", quizCards: 37 },
@@ -40,7 +40,7 @@ const Collections = () => {
           <Box display="flex" justifyContent="space-between" alignItems="start">
             <Typography>
               by
-              <Typography component={"span"} fontWeight="600" style={FieldFont2.style} pl="5px">
+              <Typography component={"span"} fontWeight="600" style={AuthorFont.style} pl="5px">
                 {card.author}
               </Typography>
             </Typography>

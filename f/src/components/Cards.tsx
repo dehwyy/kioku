@@ -4,8 +4,8 @@ import { FavoriteBorder, Forward } from "@mui/icons-material"
 import localFont from "@next/font/local"
 import { useRouter } from "next/router"
 
+const TitleFont = localFont({ src: "../fonts/galey-r.ttf" })
 const FieldFont = localFont({ src: "../fonts/gp-reg.otf" })
-const FieldFont2 = localFont({ src: "../fonts/galey-r.ttf" })
 const CardsWrapper = () => {
   const QuizCards = [
     { title: "Japanese kanji", id: 1, wordsCount: 101, likes: 122 },
@@ -14,7 +14,13 @@ const CardsWrapper = () => {
     { title: "Capitals of Africa", id: 4, wordsCount: 101, likes: 713 },
   ]
   const router = useRouter()
-  console.log(router)
+  const routerLink = async card => {
+    const cardId = card.id
+    const url = router.asPath
+    const routerQuery = router?.query
+    const link = routerQuery?.quizCardId ? `${url}/${cardId}` : routerQuery?.userId ? `/cards/${cardId}/${cardId}` : `${url}/${cardId}/${cardId}`
+    await router.push(link)
+  }
   return (
     <Box display="flex" flexDirection="column" gap="25px" data-cy="cardsCardsList">
       {QuizCards.map(card => (
@@ -31,10 +37,10 @@ const CardsWrapper = () => {
               {card.likes}
             </Button>
           </Box>
-          <Typography style={FieldFont2.style} letterSpacing="3px" fontWeight="600" fontSize="1.5rem" sx={{ textDecoration: "underline 1.5px #222222" }}>
+          <Typography style={TitleFont.style} letterSpacing="3px" fontWeight="600" fontSize="1.5rem" sx={{ textDecoration: "underline 1.5px #222222" }}>
             {card.title}
           </Typography>
-          <Button variant="contained" color="warning" endIcon={<Forward />} style={FieldFont.style} onClick={() => router.push(router?.query?.quizCardId ? `${router.asPath}/${card.id}` : router?.query?.userId ? `/cards/${card.id}/${card.id}` : `${router.asPath}/${card.id}/${card.id}`)}>
+          <Button variant="contained" color="warning" endIcon={<Forward />} style={FieldFont.style} onClick={() => routerLink(card)}>
             learn
           </Button>
         </Box>

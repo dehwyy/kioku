@@ -1,9 +1,5 @@
 import React, { useState } from "react"
-import { AppBar, Button, Divider, Grid, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, SwipeableDrawer, useMediaQuery } from "@mui/material"
-import { Menu, Collections, CardGiftcard, Person } from "@mui/icons-material"
-import localFont from "@next/font/local"
-import { useRouter } from "next/router"
-import Link from "next/link"
+import { AppBar, Grid, useMediaQuery } from "@mui/material"
 import DefaultNav from "./Navbar/DefaultNav"
 import MobileNav from "./Navbar/MobileNav"
 
