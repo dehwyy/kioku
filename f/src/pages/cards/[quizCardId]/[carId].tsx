@@ -9,15 +9,15 @@ const FieldFont = localFont({ src: "../../../fonts/aquire-bold.otf", display: "s
 const CarId = () => {
   const [isStarted, setStarted] = useState(false)
   const [isOpened, setOpened] = useState(false)
+  const [wordIndex, setWordIndex] = useState(0)
+  const serverArr = [
+    { sentence: "word112", description: "sentencesen  tencesentencese ntencesentence   entencesenten  cesente  ncesen  tencesentence" },
+    { sentence: "not word", description: "ncesen  tencesentence" },
+  ]
   const router = useRouter()
-  const s = "sentence"
-  const l = "sentencesen  tencesentencese ntencesentence   entencesenten  cesente  ncesen  tencesentence"
   const { ref, inView } = useInView({
     delay: 1500,
     trackVisibility: true,
-    onChange: () => {
-      console.log(123)
-    },
   })
   const styleTransition = prop => ({ transition: "1s ease", transform: prop ? "translateY(0)" : "translateY(25px)" })
   const boxRef = useRef(null)
@@ -40,21 +40,45 @@ const CarId = () => {
           setOpened(prev => !prev)
         }}>
         <Typography fontSize="1rem">
-          {s}
+          {serverArr[wordIndex].sentence}
           {isOpened && (
             <>
               <Divider color="black" sx={{ m: "10px 0 15px" }} />
-              {l}
+              {serverArr[wordIndex].description}
             </>
           )}
         </Typography>
       </Box>
       {isOpened && (
         <Box pt="30px" width="100%" display="flex" gap="50px" justifyContent="center">
-          <Button variant="contained" color="info" sx={{ width: 155 }}>
+          <Button
+            variant="contained"
+            color="info"
+            sx={{ width: 155 }}
+            onClick={() => {
+              setOpened(false)
+              if (serverArr.length - wordIndex - 1) {
+                setWordIndex(prev => (prev += 1))
+              } else {
+                setWordIndex(0)
+                setStarted(false)
+              }
+            }}>
             Retry soon
           </Button>
-          <Button variant="contained" color="success" sx={{ width: 155 }}>
+          <Button
+            variant="contained"
+            color="success"
+            sx={{ width: 155 }}
+            onClick={() => {
+              setOpened(false)
+              if (serverArr.length - wordIndex - 1) {
+                setWordIndex(prev => (prev += 1))
+              } else {
+                setWordIndex(0)
+                setStarted(false)
+              }
+            }}>
             Alright!
           </Button>
         </Box>

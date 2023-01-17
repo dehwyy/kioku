@@ -27,7 +27,7 @@ const Index = () => {
           <Typography fontSize="1rem" fontWeight="600" style={LogoFont.style} sx={{ color: "primary.contrastText" }} pb="10px">
             Complete solution for memorizing any information
           </Typography>
-          <Image width={400} height={400} alt="preview" src={"https://sun1-83.userapi.com/impg/-YEwOep1yOHZmV6F3-Z8XC_HP2GDiOoEP6XekA/_OTpcMMEyNI.jpg?size=828x807&quality=95&sign=89373c2f858271c65aae3d19fd2beb59&type=album"} />
+          <Image width={400} height={400} alt="preview" data-cy="previewImage" src={"https://sun1-83.userapi.com/impg/-YEwOep1yOHZmV6F3-Z8XC_HP2GDiOoEP6XekA/_OTpcMMEyNI.jpg?size=828x807&quality=95&sign=89373c2f858271c65aae3d19fd2beb59&type=album"} />
         </Box>
       </Box>
       <Box ref={ref2} sx={styleTransition(inView2)}>

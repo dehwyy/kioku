@@ -32,9 +32,9 @@ const UserId = () => {
             Username
           </Typography>
           <Tabs value={value} onChange={handleChange} sx={{ pb: "25px" }} data-cy="profileTabs">
-            <Tab value="collections" label="collections" />
-            <Tab value="cards" label="cards" />
-            <Tab value="three" label="<empty>" />
+            <Tab value="collections" label="collections" data-cy="collections" />
+            <Tab value="cards" label="cards" data-cy="cards" />
+            <Tab value="three" label="<empty>" data-cy="empty" />
           </Tabs>
         </Box>
       </Box>
