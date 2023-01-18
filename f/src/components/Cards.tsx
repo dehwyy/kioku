@@ -22,9 +22,9 @@ const CardsWrapper = () => {
     await router.push(link)
   }
   return (
-    <Box display="flex" flexDirection="column" gap="25px" data-cy="cardsCardsList">
+    <Box data-cy="cardsCardsList" display="flex" flexDirection="column" gap="25px">
       {QuizCards.map(card => (
-        <Box key={card.id} p="30px" gap="50px" bgcolor="white" display="flex" justifyContent="space-between" alignItems="center" sx={{ boxShadow: "2px 2px 1px black", border: "2px solid #222222", borderRadius: "5px" }}>
+        <Box data-cy="quizCardsItem" key={card.id} p="30px" gap="50px" bgcolor="white" display="flex" justifyContent="space-between" alignItems="center" sx={{ boxShadow: "2px 2px 1px black", border: "2px solid #222222", borderRadius: "5px" }}>
           <Box textAlign="center">
             <Typography style={FieldFont.style}>words: {card.wordsCount}</Typography>
             <Button
@@ -40,7 +40,7 @@ const CardsWrapper = () => {
           <Typography style={TitleFont.style} letterSpacing="3px" fontWeight="600" fontSize="1.5rem" sx={{ textDecoration: "underline 1.5px #222222" }}>
             {card.title}
           </Typography>
-          <Button variant="contained" color="warning" endIcon={<Forward />} style={FieldFont.style} onClick={() => routerLink(card)}>
+          <Button variant="contained" color="warning" endIcon={<Forward />} style={FieldFont.style} onClick={() => routerLink(card)} data-cy="quizCardButton">
             learn
           </Button>
         </Box>

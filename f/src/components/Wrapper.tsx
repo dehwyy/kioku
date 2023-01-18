@@ -25,7 +25,7 @@ const Wrapper: FC<wrapperProps> = ({ children, font }) => {
       <Box p="80px 0 0" minWidth="300px" maxWidth="1024px" m="0 auto">
         {children}
       </Box>
-      <Box textAlign="center" mt="auto" p="50px 0 15px 0">
+      <Box textAlign="center" mt="auto" p="50px 0 15px 0" data-cy="footer">
         <Box component="span" pr="10px">
           Creator:
         </Box>

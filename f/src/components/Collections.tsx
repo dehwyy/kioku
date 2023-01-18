@@ -44,7 +44,7 @@ const Collections = () => {
                 {card.author}
               </Typography>
             </Typography>
-            <Button endIcon={<Forward />} color="warning" variant="contained" size="small" style={FieldFont.style} onClick={() => router.push(`/cards/${card.id}`)}>
+            <Button data-cy="popularCollectionsButton" endIcon={<Forward />} color="warning" variant="contained" size="small" style={FieldFont.style} onClick={() => router.push(`/cards/${card.id}`)}>
               more
             </Button>
           </Box>

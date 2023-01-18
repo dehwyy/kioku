@@ -27,7 +27,6 @@ const CarId = () => {
       boxRef.current.style.opacity = 1
     }, 0)
   }
-
   const [isStarted, setStarted] = useState(false)
   const [isOpened, setOpened] = useState(false)
   const [wordIndex, setWordIndex] = useState(0)
@@ -79,9 +78,9 @@ const CarId = () => {
         There should be title
       </Typography>
       <Typography style={SubtitleFont.style}>
-        <Typography fontWeight="600" display="inline" pr="5px">
+        <Box fontWeight="600" component="span" pr="5px">
           727
-        </Typography>
+        </Box>
         words
       </Typography>
       <Box textAlign="center" pt="50px">
