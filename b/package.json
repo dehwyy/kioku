@@ -12,12 +12,18 @@
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix"
   },
   "dependencies": {
+    "@nestjs/apollo": "^10.1.7",
     "@nestjs/common": "^9.0.0",
     "@nestjs/core": "^9.0.0",
+    "@nestjs/graphql": "^10.1.7",
     "@nestjs/mongoose": "^9.2.1",
     "@nestjs/platform-express": "^9.0.0",
+    "apollo-server-express": "^3.11.1",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.0",
     "cross-env": "^7.0.3",
     "dotenv": "^16.0.3",
+    "graphql": "^16.6.0",
     "mongoose": "^6.8.3",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
