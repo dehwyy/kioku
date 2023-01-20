@@ -29,7 +29,7 @@ const UserId = () => {
           </Tabs>
         </Box>
       </Box>
-      {value === "collections" ? <Collections /> : value === "card" ? <CardsWrapper /> : <>empty</>}
+      {value === "collections" ? <Collections /> : value === "cards" ? <CardsWrapper /> : <>empty</>}
     </Box>
   )
 }

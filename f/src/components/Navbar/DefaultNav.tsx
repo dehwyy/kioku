@@ -21,7 +21,7 @@ const DefaultNav = () => {
         </Link>
       </Grid>
       <Grid item>
-        <Link href={"/card"}>
+        <Link href={"/cards"}>
           <Button data-cy="cardsPage" startIcon={<CardGiftcard />}>
             Favourite cards
           </Button>
