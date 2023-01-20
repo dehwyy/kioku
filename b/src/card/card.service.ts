@@ -1,17 +1,24 @@
 import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
-import CardModel from './models/card.schema'
+import CardDB from './models/card.schema'
 import { Model } from 'mongoose'
-import CreateCarDTO from './models/DTO/createCardDTO'
+import CreateCardDTO from './models/DTO/createCardDTO'
 
 @Injectable()
 export default class CardService {
-  constructor(
-    @InjectModel(CardModel.name) private cardModel: Model<CardModel>,
-  ) {}
+  constructor(@InjectModel(CardDB.name) private cardModel: Model<CardDB>) {}
   async getCardById(id: string) {
     const card = await this.cardModel.findById(id)
     return card
+  }
+
+  async getCardsByIds(ids: string[]) {
+    const cards = []
+    for (const id of ids) {
+      const card = await this.cardModel.findById(id)
+      cards.push(card)
+    }
+    return cards
   }
 
   async deleteCardById(id: string) {
@@ -19,7 +26,7 @@ export default class CardService {
     return card
   }
 
-  async createCard(userData: CreateCarDTO) {
+  async createCard(userData: CreateCardDTO) {
     const card = await this.cardModel.create(userData)
     return card
   }

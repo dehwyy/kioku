@@ -12,7 +12,8 @@ const mongoose_1 = require("@nestjs/mongoose");
 const dotenv = require("dotenv");
 const graphql_1 = require("@nestjs/graphql");
 const apollo_1 = require("@nestjs/apollo");
-const card_module_1 = require("./cards/card.module");
+const card_module_1 = require("./card/card.module");
+const quizCard_module_1 = require("./quizCard/quizCard.module");
 dotenv.config();
 const DATABASE = process.env.DATABASE;
 let MainModule = class MainModule {
@@ -30,6 +31,7 @@ MainModule = __decorate([
             }),
             mongoose_1.MongooseModule.forRoot(DATABASE),
             card_module_1.default,
+            quizCard_module_1.default,
         ],
     })
 ], MainModule);

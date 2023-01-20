@@ -6,7 +6,7 @@ describe("navigation", () => {
     it("profile navigation", () => {
       cy.get('[data-cy=profilePage]').click().get('[data-cy="profileTabs"]').should("exist")
     })
-    it("cards navigation", () => {
+    it("card navigation", () => {
       cy.get('[data-cy="cardsPage"]').click().get('[data-cy="cardsCardsList"]').should("exist")
     })
     it("collections navigation", () => {
@@ -18,32 +18,32 @@ describe("navigation", () => {
       const button = cy.scrollTo(0, 300).get("button").contains(/sign up/i)
       button.click()
     })
-    it("from popularCollections to quiz-cards", () => {
+    it("from popularCollections to quiz-card", () => {
       cy.get('[data-cy=collectionsPage]').click()
       cy.get("[data-cy=popularCollectionsButton]").last().click()
       cy.url().should("match", /\/cards\/\d/)
       cy.scrollTo("top", {ensureScrollable: false})
       cy.contains(/quiz-cards/i)
     })
-    it("from quiz-cards to card", () => {
+    it("from quiz-card to card", () => {
       cy.get('[data-cy=cardsPage]').click()
       cy.get("[data-cy=quizCardButton]").last().click()
       cy.url().should("match", /\/cards\/\d\/\d/)
       cy.contains(/begin learning/i)
     })
-    it("from quiz-cards to card", () => {
+    it("from quiz-card to card", () => {
       cy.get('[data-cy=cardsPage]').click()
       cy.get("[data-cy=quizCardButton]").last().click()
       cy.url().should("match", /\/cards\/\d\/\d/)
     })
-    it("PROFILE/cards => card", () => {
+    it("PROFILE/card => card", () => {
       cy.get("[data-cy=profilePage]").click()
-      cy.get('[data-cy=cards]').click()
+      cy.get('[data-cy=card]').click()
       cy.get("[data-cy=quizCardButton]").last().click()
       cy.url().should("match", /\/cards\/\d\/\d/)
       cy.get("button").contains(/begin learning/i)
     })
-    it("PROFILE/collections => quiz-cards", () => {
+    it("PROFILE/collections => quiz-card", () => {
       cy.get('[data-cy=profilePage]').click()
       cy.get('[data-cy=collections]').click()
       cy.get("[data-cy=popularCollectionsButton]").first().click()
@@ -88,7 +88,7 @@ describe("singlePage test", () => {
       cy.visit("/user/1")
     })
     it("section switch test", () => {
-      cy.get("[data-cy=cards]").click().get("button").contains(/learn/i).should("exist")
+      cy.get("[data-cy=card]").click().get("button").contains(/learn/i).should("exist")
       cy.get("[data-cy=collections]").click().get("button").contains(/more/i).should("exist")
     })
   })
@@ -108,14 +108,14 @@ describe("footer on every page", () => {
   it("popularCollections page", () => {
     cy.visit("/popularCollections")
   })
-  it("cards page", () => {
-    cy.visit("/cards")
+  it("card page", () => {
+    cy.visit("/card")
   })
   it("quiz-card page", () => {
-    cy.visit("/cards/1")
+    cy.visit("/card/1")
   })
   it("card page", () => {
-    cy.visit("/cards/1/1")
+    cy.visit("/card/1/1")
   })
   it("user page", () => {
     cy.visit("/user/1")

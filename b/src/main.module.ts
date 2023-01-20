@@ -3,7 +3,8 @@ import { MongooseModule } from '@nestjs/mongoose'
 import * as dotenv from 'dotenv'
 import { GraphQLModule } from '@nestjs/graphql'
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
-import CardModule from './cards/card.module'
+import CardModule from './card/card.module'
+import QuizCardModule from './quizCard/quizCard.module'
 
 dotenv.config()
 const DATABASE = process.env.DATABASE
@@ -19,6 +20,7 @@ const DATABASE = process.env.DATABASE
     }),
     MongooseModule.forRoot(DATABASE),
     CardModule,
+    QuizCardModule,
   ],
 })
 export class MainModule {}
