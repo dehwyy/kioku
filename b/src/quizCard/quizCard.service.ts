@@ -21,16 +21,16 @@ export default class QuizCardService {
     return quizCard
   }
   async addToQuizCard(quizCardData: UpdateQuizCardDTO) {
-    const { cardId, _id } = quizCardData
-    const quizCard = await this.QuizCard.findByIdAndUpdate(_id, {
+    const { cardId, id } = quizCardData
+    const quizCard = await this.QuizCard.findByIdAndUpdate(id, {
       $addToSet: { cards: cardId },
     })
     return quizCard
   }
 
   async removeFromQuizCard(quizCardData: UpdateQuizCardDTO) {
-    const { cardId, _id } = quizCardData
-    const quizCard = await this.QuizCard.findByIdAndUpdate(_id, {
+    const { cardId, id } = quizCardData
+    const quizCard = await this.QuizCard.findByIdAndUpdate(id, {
       $pull: { cards: cardId },
     })
     return quizCard

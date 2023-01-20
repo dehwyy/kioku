@@ -16,3 +16,10 @@ export class CreateCardDTO implements CardInputType {
   @IsString()
   face: string
 }
+
+@ArgsType()
+export class UpdateCardDTO extends CreateCardDTO {
+  @Field({ nullable: false })
+  @IsString()
+  id: string
+}

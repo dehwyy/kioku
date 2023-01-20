@@ -23,31 +23,6 @@ export default class QuizCardResolver {
     private CardService: CardService,
   ) {}
 
-  @Mutation(returns => QuizCard, { name: 'createQuizCard' })
-  async createQuizCard(@Args() quizCardData: CreateQuizCardDTO) {
-    const quizCard = await this.quizCardService.createQuizCard(quizCardData)
-    return quizCard
-  }
-  @Mutation(returns => String, { name: 'addToQuizCard' })
-  async addToQuizCard(@Args() quizCardData: UpdateQuizCardDTO) {
-    const isModified = await this.quizCardService.addToQuizCard(quizCardData)
-    return isModified ? `modified ${quizCardData.cardId}` : 'error'
-  }
-
-  @Mutation(returns => String, { name: 'removeFromQuizCard' })
-  async removeFromQuizCard(@Args() quizCardData: UpdateQuizCardDTO) {
-    const isModified = await this.quizCardService.removeFromQuizCard(
-      quizCardData,
-    )
-    return isModified ? `modified ${quizCardData.cardId}` : 'error'
-  }
-
-  @Mutation(returns => QuizCard, { name: 'deleteQuizCard' })
-  async deleteQuizCard(@Args('id', { type: () => ID }) quizCardId: string) {
-    const quizCard = await this.quizCardService.deleteQuizCard(quizCardId)
-    return quizCard
-  }
-
   @Query(returns => QuizCard, { name: 'quizCard' })
   async getQuizCard(@Args('id', { type: () => ID }) quizCardId: string) {
     const quizCard = await this.quizCardService.findQuizCardById(quizCardId)
@@ -59,5 +34,30 @@ export default class QuizCardResolver {
     const { cards: ids } = quizCardData
     const cards = this.CardService.getCardsByIds(ids)
     return cards
+  }
+  @Mutation(returns => String, { name: 'removeFromQuizCard' })
+  async removeFromQuizCard(@Args() quizCardData: UpdateQuizCardDTO) {
+    const isModified = await this.quizCardService.removeFromQuizCard(
+      quizCardData,
+    )
+    return isModified ? `modified ${quizCardData.cardId}` : 'error'
+  }
+
+  @Mutation(returns => QuizCard, { name: 'createQuizCard' })
+  async createQuizCard(@Args() quizCardData: CreateQuizCardDTO) {
+    const quizCard = await this.quizCardService.createQuizCard(quizCardData)
+    return quizCard
+  }
+
+  @Mutation(returns => String, { name: 'addToQuizCard' })
+  async addToQuizCard(@Args() quizCardData: UpdateQuizCardDTO) {
+    const isModified = await this.quizCardService.addToQuizCard(quizCardData)
+    return isModified ? `modified ${quizCardData.cardId}` : 'error'
+  }
+
+  @Mutation(returns => QuizCard, { name: 'deleteQuizCard' })
+  async deleteQuizCard(@Args('id', { type: () => ID }) quizCardId: string) {
+    const quizCard = await this.quizCardService.deleteQuizCard(quizCardId)
+    return quizCard
   }
 }
