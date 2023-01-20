@@ -2,8 +2,10 @@ import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import QuizCardDB from '@src/quizCard/models/quizCard.schema'
 import { Model } from 'mongoose'
-import CreateQuizCardDTO from '@src/quizCard/models/DTO/createQuizCardDTO'
-import UpdateQuizCardDTO from '@src/quizCard/models/DTO/updateQuizCardDTO'
+import {
+  CreateQuizCardDTO,
+  UpdateQuizCardDTO,
+} from '@src/quizCard/models/quizCard.dto'
 
 @Injectable()
 export default class QuizCardService {

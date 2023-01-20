@@ -1,9 +1,13 @@
-import { CardInputType } from '../card.ab'
 import { IsString } from 'class-validator'
 import { ArgsType, Field } from '@nestjs/graphql'
 
+export abstract class CardInputType {
+  face: string
+  backface: string
+}
+
 @ArgsType()
-export default class CreateCardDTO implements CardInputType {
+export class CreateCardDTO implements CardInputType {
   @Field({ nullable: false })
   @IsString()
   backface: string

@@ -1,7 +1,7 @@
 import CardQL from './models/card.model'
 import { Args, ID, Int, Mutation, Query, Resolver } from '@nestjs/graphql'
 import CardService from './card.service'
-import CreateCarDTO from './models/DTO/createCardDTO'
+import { CreateCardDTO } from '@src/card/models/card.dto'
 
 @Resolver(of => CardQL)
 export default class CardResolver {
@@ -20,7 +20,7 @@ export default class CardResolver {
   }
 
   @Mutation(returns => CardQL, { name: 'createCard' })
-  async createCard(@Args() userData: CreateCarDTO) {
+  async createCard(@Args() userData: CreateCardDTO) {
     const card = await this.cardService.createCard(userData)
     return card
   }

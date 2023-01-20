@@ -1,5 +1,5 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql'
-import { CardInputType } from './card.ab'
+import { CardInputType } from './card.dto'
 
 @ObjectType({ description: 'CardModel' })
 export default class CardQL implements CardInputType {

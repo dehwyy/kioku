@@ -8,9 +8,11 @@ import {
   Resolver,
 } from '@nestjs/graphql'
 import QuizCard from './models/quizCard.model'
-import CreateQuizCardDTO from './models/DTO/createQuizCardDTO'
 import QuizCardService from './quizCard.service'
-import UpdateQuizCardDTO from '@src/quizCard/models/DTO/updateQuizCardDTO'
+import {
+  UpdateQuizCardDTO,
+  CreateQuizCardDTO,
+} from '@src/quizCard/models/quizCard.dto'
 import CardQL from '@src/card/models/card.model'
 import CardService from '@src/card/card.service'
 

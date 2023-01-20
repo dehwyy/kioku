@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
-import { CardInputType } from './card.ab'
+import { CardInputType } from './card.dto'
+
 @Schema({ collection: 'cards' })
 export default class CardDB implements CardInputType {
   @Prop({ isRequired: true })
