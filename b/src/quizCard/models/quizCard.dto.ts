@@ -14,10 +14,8 @@ export class CreateQuizCardDTO {
 @ArgsType()
 export class UpdateQuizCardDTO {
   @Field({ description: 'quizCardId' })
-  @IsString()
   id: string
 
   @Field({ description: 'cardId' })
-  @IsString()
   cardId: string
 }

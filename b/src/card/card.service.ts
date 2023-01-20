@@ -1,12 +1,13 @@
 import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import CardDB from './models/card.schema'
-import { Model } from 'mongoose'
+import { Model, ObjectId } from 'mongoose'
 import { CreateCardDTO, UpdateCardDTO } from '@src/card/models/card.dto'
 
 @Injectable()
 export default class CardService {
   constructor(@InjectModel(CardDB.name) private CardModel: Model<CardDB>) {}
+
   async getCardById(id: string) {
     const card = await this.CardModel.findById(id)
     return card

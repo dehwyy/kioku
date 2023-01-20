@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import QuizCardDB from '@src/quizCard/models/quizCard.schema'
-import { Model } from 'mongoose'
+import { Model, ObjectId } from 'mongoose'
 import {
   CreateQuizCardDTO,
   UpdateQuizCardDTO,

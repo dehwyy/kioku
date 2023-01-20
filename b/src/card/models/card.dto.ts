@@ -20,6 +20,5 @@ export class CreateCardDTO implements CardInputType {
 @ArgsType()
 export class UpdateCardDTO extends CreateCardDTO {
   @Field({ nullable: false })
-  @IsString()
   id: string
 }

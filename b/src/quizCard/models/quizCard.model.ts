@@ -1,4 +1,5 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql'
+import CardQL from '@src/card/models/card.model'
 
 @ObjectType({ description: 'QuizCardModel' })
 export default class QuizCardQL {
@@ -8,6 +9,6 @@ export default class QuizCardQL {
   @Field({ nullable: false })
   quizCardName: string
 
-  @Field(type => [String])
-  cards: string[]
+  @Field(type => [CardQL])
+  cards: CardQL[]
 }
