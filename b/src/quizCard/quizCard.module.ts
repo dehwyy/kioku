@@ -12,6 +12,7 @@ import CardModule from '@src/card/card.module'
     ]),
     CardModule,
   ],
+  exports: [QuizCardService],
   providers: [QuizCardResolver, QuizCardService],
 })
 export default class QuizCardModule {}

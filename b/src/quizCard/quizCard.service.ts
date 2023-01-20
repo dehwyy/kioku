@@ -6,11 +6,13 @@ import {
   CreateQuizCardDTO,
   UpdateQuizCardDTO,
 } from '@src/quizCard/models/quizCard.dto'
+import CardService from '@src/card/card.service'
 
 @Injectable()
 export default class QuizCardService {
   constructor(
     @InjectModel(QuizCardDB.name) private QuizCard: Model<QuizCardDB>,
+    private cardService: CardService,
   ) {}
   async createQuizCard(quizCardData: CreateQuizCardDTO) {
     const { quizCardName, cards } = quizCardData
@@ -44,5 +46,13 @@ export default class QuizCardService {
   async findQuizCardById(id: string) {
     const quizCard = await this.QuizCard.findById(id)
     return quizCard
+  }
+  async findQuizByIds(ids: string[]) {
+    const quizCards = []
+    for (let id of ids) {
+      const quizCard = await this.QuizCard.findById(id).populate('cards')
+      quizCards.push(quizCard)
+    }
+    return quizCards
   }
 }
