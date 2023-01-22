@@ -1,0 +1,68 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+"""CardModel"""
+type CardQL {
+  _id: ID!
+  backface: String!
+  face: String!
+}
+
+"""CollectionModel"""
+type CollectionQL {
+  _id: ID!
+  collectionName: String!
+  quizCards: [QuizCardQL!]!
+}
+
+type Mutation {
+  addToCollection(
+    """quizCardId"""
+    cardId: String!
+
+    """collectionId"""
+    id: String!
+  ): String!
+  addToQuizCard(
+    """cardId"""
+    cardId: String!
+
+    """quizCardId"""
+    id: String!
+  ): String!
+  createCard(backface: String!, face: String!): CardQL!
+  createCollection(collectionName: String!, quizCards: [String!]!): CollectionQL!
+  createQuizCard(cards: [String!]!, quizCardName: String!): QuizCardQL!
+  deleteCard(id: ID!): CardQL!
+  deleteCollection(id: ID!): CollectionQL!
+  deleteQuizCard(id: ID!): QuizCardQL!
+  removeFromCollection(
+    """quizCardId"""
+    cardId: String!
+
+    """collectionId"""
+    id: String!
+  ): String!
+  removeFromQuizCard(
+    """cardId"""
+    cardId: String!
+
+    """quizCardId"""
+    id: String!
+  ): String!
+  updateCard(backface: String!, face: String!, id: String!): String!
+}
+
+type Query {
+  card(id: ID!): CardQL!
+  collection(id: ID!): CollectionQL!
+  quizCard(id: ID!): QuizCardQL!
+}
+
+"""QuizCardModel"""
+type QuizCardQL {
+  _id: ID!
+  cards: [CardQL!]!
+  quizCardName: String!
+}

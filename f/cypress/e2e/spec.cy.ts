@@ -53,7 +53,7 @@ describe("navigation", () => {
     })
   })
 })
-describe("singlePage test", () => {
+describe("singlePage tests", () => {
   context("LoginPage", () => {
     beforeEach(() => {
       cy.visit("/login")
@@ -61,14 +61,14 @@ describe("singlePage test", () => {
       cy.get("[data-cy=firstInput]").as("fInput")
       cy.get("[data-cy=secondInput]").as("sInput")
     })
-    it("simple test", () => {
+    it("simple tests", () => {
       cy.get("@fInput").type("login")
       cy.get("@sInput").type("password")
       cy.contains(/submit/i).click()
       cy.get("[data-cy=loader]")
       cy.url().should("match", /user\/\d/)
     })
-    // it("wrong test by email", () => {
+    // it("wrong tests by email", () => {
     //   cy.get("@fInput").type("wrong login")
     //   const url = cy.url()
     //   cy.get("[data-cy=errorMessage]").should("exist")
@@ -87,7 +87,7 @@ describe("singlePage test", () => {
     beforeEach(() => {
       cy.visit("/user/1")
     })
-    it("section switch test", () => {
+    it("section switch tests", () => {
       cy.get("[data-cy=cards]").click().get("button").contains(/learn/i).should("exist")
       cy.get("[data-cy=collections]").click().get("button").contains(/more/i).should("exist")
     })

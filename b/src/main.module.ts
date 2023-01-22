@@ -6,6 +6,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo'
 import CardModule from './card/card.module'
 import QuizCardModule from './quizCard/quizCard.module'
 import CollectionModule from '@src/collection/collection.module'
+import { join } from 'path'
 
 dotenv.config()
 const DATABASE = process.env.DATABASE
@@ -13,7 +14,8 @@ const DATABASE = process.env.DATABASE
   imports: [
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      autoSchemaFile: true,
+      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      sortSchema: true,
       cors: {
         origin: 'http://localhost:3000',
         credentials: true,

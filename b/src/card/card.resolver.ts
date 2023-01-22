@@ -2,9 +2,7 @@ import CardQL from './models/card.model'
 import { Args, ID, Mutation, Query, Resolver } from '@nestjs/graphql'
 import CardService from './card.service'
 import { CreateCardDTO, UpdateCardDTO } from '@src/card/models/card.dto'
-import { ApiTags } from '@nestjs/swagger'
 
-@ApiTags('cards')
 @Resolver(of => CardQL)
 export default class CardResolver {
   constructor(private cardService: CardService) {}
