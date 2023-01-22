@@ -9,6 +9,6 @@ export default class CollectionQL {
   @Field({ nullable: false })
   collectionName: string
 
-  @Field(type => [QuizCardQL])
+  @Field(type => [QuizCardQL], { nullable: 'items' })
   quizCards: QuizCardQL[]
 }

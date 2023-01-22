@@ -15,7 +15,6 @@ import {
 } from '@src/quizCard/models/quizCard.dto'
 import CardQL from '@src/card/models/card.model'
 import CardService from '@src/card/card.service'
-import { ObjectId } from 'mongoose'
 
 @Resolver(of => QuizCard)
 export default class QuizCardResolver {
@@ -30,7 +29,7 @@ export default class QuizCardResolver {
     return quizCard
   }
 
-  @ResolveField('cards', returns => [CardQL])
+  @ResolveField('cards', returns => [CardQL], { nullable: 'items' })
   async getCardsById(@Parent() quizCardData: CreateQuizCardDTO) {
     const { cards: ids } = quizCardData
     const cards = await this.CardService.getCardsByIds(ids)

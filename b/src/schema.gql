@@ -13,7 +13,7 @@ type CardQL {
 type CollectionQL {
   _id: ID!
   collectionName: String!
-  quizCards: [QuizCardQL!]!
+  quizCards: [QuizCardQL]!
 }
 
 type Mutation {
@@ -33,7 +33,7 @@ type Mutation {
   ): String!
   createCard(backface: String!, face: String!): CardQL!
   createCollection(collectionName: String!, quizCards: [String!]!): CollectionQL!
-  createQuizCard(cards: [String!]!, quizCardName: String!): QuizCardQL!
+  createQuizCard(cards: [String]!, quizCardName: String!): QuizCardQL!
   deleteCard(id: ID!): CardQL!
   deleteCollection(id: ID!): CollectionQL!
   deleteQuizCard(id: ID!): QuizCardQL!
@@ -63,6 +63,6 @@ type Query {
 """QuizCardModel"""
 type QuizCardQL {
   _id: ID!
-  cards: [CardQL!]!
+  cards: [CardQL]!
   quizCardName: String!
 }

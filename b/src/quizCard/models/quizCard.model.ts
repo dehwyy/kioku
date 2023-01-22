@@ -9,6 +9,6 @@ export default class QuizCardQL {
   @Field({ nullable: false })
   quizCardName: string
 
-  @Field(type => [CardQL])
+  @Field(type => [CardQL], { nullable: 'items' })
   cards: CardQL[]
 }

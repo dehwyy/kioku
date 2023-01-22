@@ -29,7 +29,7 @@ export default class CollectionResolver {
     const collection = this.collectionService.getCollectionById(id)
     return collection
   }
-  @ResolveField('quizCards', returns => [QuizCardQL])
+  @ResolveField('quizCards', returns => [QuizCardQL], { nullable: 'items' })
   async quizCardsFieldResolver(@Parent() collectionData: CreateCollectionDTO) {
     const { quizCards: ids } = collectionData
     const quizCards = await this.quizCardsService.findQuizByIds(ids)

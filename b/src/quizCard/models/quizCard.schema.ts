@@ -7,7 +7,11 @@ export default class QuizCardDB {
   @Prop({ isRequired: true })
   quizCardName: string
 
-  @Prop({ type: [{ type: mongoose.Types.ObjectId, ref: () => CardDB }] })
+  @Prop({
+    type: [
+      { type: mongoose.Types.ObjectId, ref: () => CardDB, required: false },
+    ],
+  })
   cards: CardDB[]
 }
 

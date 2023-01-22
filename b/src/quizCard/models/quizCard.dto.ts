@@ -7,7 +7,7 @@ export class CreateQuizCardDTO {
   @IsString()
   quizCardName: string
 
-  @Field(type => [String])
+  @Field(type => [String], { nullable: 'items' })
   cards: string[]
 }
 

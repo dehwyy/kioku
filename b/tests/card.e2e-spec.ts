@@ -3,10 +3,11 @@ import gql from 'graphql-tag'
 import { Test, TestingModule } from '@nestjs/testing'
 import { INestApplication } from '@nestjs/common'
 import { MainModule } from '@src/main.module'
+import { createCard } from "./utils"
 
 type cardResponse = Record<string, { _id: string }>
 
-describe('AppController (e2e)', () => {
+describe('card e2e', () => {
   let app: INestApplication
   let id: string
   beforeEach(async () => {
@@ -18,15 +19,7 @@ describe('AppController (e2e)', () => {
   })
 
   it('create card', async () => {
-    const { data } = await request<cardResponse>(app.getHttpServer())
-      .mutate(gql`
-          mutation CreateCard($face: String!, $backface: String!) {
-            createCard(backface: $backface, face: $face) {
-              _id
-              backface
-              face
-            }
-          }`).variables({ face: 'test', backface: 'test' }).expectNoErrors()
+    const { data } = await createCard<"createCard">({ face: 'test', backface: 'test', app }).expectNoErrors()
     id = data.createCard._id
     expect(id).toBeTruthy()
   })
