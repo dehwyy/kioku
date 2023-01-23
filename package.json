@@ -5,13 +5,14 @@
   "main": "index.js",
   "husky": {
     "hooks": {
-      "pre-commit": "pre-commit"
+      "pre-commit": ""
     }
   },
   "scripts": {
     "pre-commit": "run-p b:test f:test",
     "b:test": "cd b && pnpm run pre-commit",
-    "f:test": "cd f && pnpm run pre-commit"
+    "f:test": "cd f && pnpm run pre-commit",
+    "prepare": "husky install"
   },
   "keywords": [],
   "author": "",
