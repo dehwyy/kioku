@@ -34,9 +34,11 @@ type Mutation {
   createCard(backface: String!, face: String!): CardQL!
   createCollection(collectionName: String!, quizCards: [String!]!): CollectionQL!
   createQuizCard(cards: [String]!, quizCardName: String!): QuizCardQL!
+  createUser(cards: [String]!, collections: [String]!, email: String!, password: String!, quizCards: [String]!, username: String!): UserModel!
   deleteCard(id: ID!): CardQL!
   deleteCollection(id: ID!): CollectionQL!
   deleteQuizCard(id: ID!): QuizCardQL!
+  deleteUser(id: ID!): UserModel!
   removeFromCollection(
     """quizCardId"""
     cardId: String!
@@ -52,12 +54,14 @@ type Mutation {
     id: String!
   ): String!
   updateCard(backface: String!, face: String!, id: String!): String!
+  updateUser(cards: [String], collections: [String], email: String, id: ID!, password: String, quizCards: [String], username: String): UserModel!
 }
 
 type Query {
   card(id: ID!): CardQL!
   collection(id: ID!): CollectionQL!
   quizCard(id: ID!): QuizCardQL!
+  user(id: ID!): UserModel!
 }
 
 """QuizCardModel"""
@@ -65,4 +69,15 @@ type QuizCardQL {
   _id: ID!
   cards: [CardQL]!
   quizCardName: String!
+}
+
+"""user model"""
+type UserModel {
+  _id: String!
+  cards: [CardQL]!
+  collections: [CollectionQL]!
+  email: String!
+  password: String!
+  quizCards: [QuizCardQL]!
+  username: String!
 }
