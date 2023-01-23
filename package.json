@@ -5,7 +5,7 @@
   "main": "index.js",
   "husky": {
     "hooks": {
-      "pre-commit": "pnpm run pre-commit"
+      "pre-commit": "pre-commit"
     }
   },
   "scripts": {
