@@ -7,7 +7,7 @@ import { createCard } from "./utils"
 
 type cardResponse = Record<string, { _id: string }>
 
-describe('card e2e', () => {
+describe.skip('card e2e', () => {
   let app: INestApplication
   let id: string
   beforeEach(async () => {

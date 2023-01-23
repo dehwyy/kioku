@@ -24,10 +24,10 @@ export function createCard<T extends string>({
     )
     .variables({ face, backface })
 }
-interface quizCardFields {
+export interface quizCardFields {
   _id: string
-  quizCard: string
-  cards: cardDataType
+  quizCardName: string
+  cards: cardDataType[]
 }
 type createQuizCardArgs = {
   cards: string[]

@@ -10,10 +10,12 @@ const PORT = process.env.PORT || 2726
 const start = async () => {
   try {
     const app = await NestFactory.create<NestExpressApplication>(MainModule)
-    app.useGlobalPipes(new ValidationPipe())
-    await app.listen(PORT, () =>
-      console.log(`http://localhost:${PORT}/graphql`),
-    )
+    new ValidationPipe({
+      forbidUnknownValues: false,
+    }),
+      await app.listen(PORT, () =>
+        console.log(`http://localhost:${PORT}/graphql`),
+      )
   } catch (e) {
     console.log(e)
   }
