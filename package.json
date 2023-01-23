@@ -1,0 +1,23 @@
+{
+  "name": "nextnest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "husky": {
+    "hooks": {
+      "pre-commit": "pnpm run pre-commit"
+    }
+  },
+  "scripts": {
+    "pre-commit": "run-p b:test f:test",
+    "b:test": "cd b && pnpm run pre-commit",
+    "f:test": "cd f && pnpm run pre-commit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "husky": "^8.0.3",
+    "npm-run-all": "^4.1.5"
+  }
+}

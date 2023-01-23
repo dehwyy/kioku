@@ -10,7 +10,8 @@
     "cypress": "cypress open",
     "test:cypress": "start-server-and-test dev http://localhost:3000 cypress",
     "test:jest": "jest",
-    "lint": "next lint --fix"
+    "lint": "next lint --fix",
+    "pre-commit": "pnpm run lint && pnpm run test:jest && pnpm run test:cypress"
   },
   "keywords": [],
   "author": "",

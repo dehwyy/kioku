@@ -63,3 +63,9 @@ export function createQuizCard({
     )
     .variables({ quizCardName, cards })
 }
+
+export interface collectionResponse {
+  _id: string
+  collectionName: string
+  quizCards: quizCardFields[]
+}

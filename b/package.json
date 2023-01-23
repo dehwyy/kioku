@@ -10,7 +10,8 @@
     "start:prod": "node dist/main",
     "test:e2e": "jest --config ./tests/jest-e2e.json --watch --detectOpenHandles --forceExit",
     "test": "jest --watch",
-    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix"
+    "lint": "eslint --fix",
+    "pre-commit": "jest && jest --config ./tests/jest-e2e.json --detectOpenHandles --forceExit && pnpm run lint"
   },
   "dependencies": {
     "@nestjs/apollo": "^10.1.7",

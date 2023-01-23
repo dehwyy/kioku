@@ -46,7 +46,9 @@ export default class CollectionResolver {
   async addToCollection(@Args() updateCollectionData: UpdateCollectionDTO) {
     const isModified =
       this.collectionService.addToCollection(updateCollectionData)
-    return isModified ? `collection ${updateCollectionData.id}` : 'error'
+    return isModified
+      ? `modified collection ${updateCollectionData.id}`
+      : 'error'
   }
 
   @Mutation(() => String, { name: 'removeFromCollection' })
@@ -55,7 +57,9 @@ export default class CollectionResolver {
   ) {
     const isModified =
       this.collectionService.removeFromCollection(updateCollectionData)
-    return isModified ? `collection ${updateCollectionData.id}` : 'error'
+    return isModified
+      ? `modified collection ${updateCollectionData.id}`
+      : 'error'
   }
 
   @Mutation(() => CollectionQL, { name: 'createCollection' })
