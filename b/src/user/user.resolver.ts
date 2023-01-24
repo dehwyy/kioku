@@ -31,8 +31,14 @@ export class UserResolver {
   }
 
   @Mutation(() => UserModel)
-  async updateUserLists(@Args() updateUserList: UpdateUserListsDTO) {
-    const user = await this.userService.updateUserLists(updateUserList)
+  async pushToUserList(@Args() updateUserList: UpdateUserListsDTO) {
+    const user = await this.userService.pushToUserList(updateUserList)
+    return user
+  }
+
+  @Mutation(() => UserModel)
+  async removeFromUserList(@Args() updateUserList: UpdateUserListsDTO) {
+    const user = await this.userService.removeFromUserList(updateUserList)
     return user
   }
 

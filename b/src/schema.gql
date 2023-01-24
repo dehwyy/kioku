@@ -39,6 +39,7 @@ type Mutation {
   deleteCollection(id: ID!): CollectionQL!
   deleteQuizCard(id: ID!): QuizCardQL!
   deleteUser(id: ID!): UserModel!
+  pushToUserList(cards: [String], collections: [String], id: ID!, quizCards: [String]): UserModel!
   removeFromCollection(
     """quizCardId"""
     cardId: String!
@@ -53,9 +54,9 @@ type Mutation {
     """quizCardId"""
     id: String!
   ): String!
+  removeFromUserList(cards: [String], collections: [String], id: ID!, quizCards: [String]): UserModel!
   updateCard(backface: String!, face: String!, id: String!): String!
   updateUser(email: String, id: ID!, password: String, username: String): UserModel!
-  updateUserLists(cards: [String], collections: [String], id: ID!, quizCards: [String]): UserModel!
 }
 
 type Query {

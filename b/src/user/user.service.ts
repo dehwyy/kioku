@@ -28,10 +28,17 @@ export class UserService {
     return user
   }
 
-  async updateUserLists(updateUserLists: Partial<UpdateUserListsDTO>) {
+  async pushToUserList(updateUserLists: Partial<UpdateUserListsDTO>) {
     const { id, ...newUserListsData } = updateUserLists
     const user = await this.User.findByIdAndUpdate(id, {
       $addToSet: newUserListsData,
+    })
+    return user
+  }
+  async removeFromUserList(updateUserLists: Partial<UpdateUserListsDTO>) {
+    const { id, ...newUserListsData } = updateUserLists
+    const user = await this.User.findByIdAndUpdate(id, {
+      $pullAll: newUserListsData,
     })
     return user
   }
