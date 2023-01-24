@@ -3,9 +3,10 @@ import CardDB from '@src/card/models/card.schema'
 import QuizCardDB from '@src/quizCard/models/quizCard.schema'
 import mongoose from 'mongoose'
 import CollectionDB from '@src/collection/models/collection.schema'
+import { UserExtraDB, UserBasicData } from '@src/user/models/user.interfaces'
 
 @Schema({ collection: 'users' })
-export default class UserDB {
+export default class UserDB implements UserExtraDB, UserBasicData {
   @Prop({ isRequired: true })
   email: string
 

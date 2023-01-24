@@ -1,8 +1,13 @@
 import { ArgsType, Field, ID } from '@nestjs/graphql'
 import { IsString } from 'class-validator'
+import {
+  UpdateUserLists,
+  UserBasicData,
+  UserListsData,
+} from '@src/user/models/user.interfaces'
 
 @ArgsType()
-export class CreateUserDTO {
+export class CreateUserDTO implements UserBasicData, UserListsData {
   @Field()
   @IsString()
   username: string
@@ -26,7 +31,22 @@ export class CreateUserDTO {
 }
 
 @ArgsType()
-export class UpdateUserInfo {
+export class UpdateUserListsDTO implements UpdateUserLists {
+  @Field(type => [String], { nullable: 'itemsAndList' })
+  quizCards: string[]
+
+  @Field(type => [String], { nullable: 'itemsAndList' })
+  cards: string[]
+
+  @Field(type => [String], { nullable: 'itemsAndList' })
+  collections: string[]
+
+  @Field(type => ID)
+  id: string
+}
+
+@ArgsType()
+export class UpdateUserInfoDTO implements UpdateUserInfoDTO {
   @Field({ nullable: true })
   @IsString()
   username: string
@@ -38,15 +58,6 @@ export class UpdateUserInfo {
   @Field({ nullable: true })
   @IsString()
   password: string
-
-  @Field(type => [String], { nullable: 'itemsAndList' })
-  quizCards: string[]
-
-  @Field(type => [String], { nullable: 'itemsAndList' })
-  cards: string[]
-
-  @Field(type => [String], { nullable: 'itemsAndList' })
-  collections: string[]
 
   @Field(type => ID)
   id: string

@@ -2,9 +2,10 @@ import { Field, ObjectType } from '@nestjs/graphql'
 import CardQL from '@src/card/models/card.model'
 import QuizCardQL from '@src/quizCard/models/quizCard.model'
 import CollectionQL from '@src/collection/models/collection.model'
+import { UserFullDataQL } from '@src/user/models/user.interfaces'
 
 @ObjectType({ description: 'user model' })
-export default class UserModel {
+export default class UserModel implements UserFullDataQL {
   @Field()
   password: string
 

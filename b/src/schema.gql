@@ -54,7 +54,8 @@ type Mutation {
     id: String!
   ): String!
   updateCard(backface: String!, face: String!, id: String!): String!
-  updateUser(cards: [String], collections: [String], email: String, id: ID!, password: String, quizCards: [String], username: String): UserModel!
+  updateUser(email: String, id: ID!, password: String, username: String): UserModel!
+  updateUserLists(cards: [String], collections: [String], id: ID!, quizCards: [String]): UserModel!
 }
 
 type Query {
