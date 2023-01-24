@@ -2,7 +2,10 @@ import CardQL from './models/card.model'
 import { Args, ID, Mutation, Query, Resolver } from '@nestjs/graphql'
 import CardService from './card.service'
 import { CreateCardDTO, UpdateCardDTO } from '@src/card/models/card.dto'
+import { UseGuards } from '@nestjs/common'
+import { JwtAuthGuard } from '@src/auth/auth.guard'
 
+@UseGuards(JwtAuthGuard)
 @Resolver(of => CardQL)
 export default class CardResolver {
   constructor(private cardService: CardService) {}

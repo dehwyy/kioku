@@ -2,23 +2,19 @@ import { Resolver, Query, Mutation, Args, Int, ID } from '@nestjs/graphql'
 import { UserService } from './user.service'
 import UserModel from '@src/user/models/user.model'
 import {
-  CreateUserDTO,
   UpdateUserInfoDTO,
   UpdateUserListsDTO,
 } from '@src/user/models/user.dto'
-import { UpdateUserLists } from '@src/user/models/user.interfaces'
+import { UseGuards } from '@nestjs/common'
+import { JwtAuthGuard } from '@src/auth/auth.guard'
 
+@UseGuards(JwtAuthGuard)
 @Resolver(() => UserModel)
 export class UserResolver {
   constructor(private userService: UserService) {}
 
-  @Mutation(() => UserModel)
-  async createUser(@Args() createUserInput: CreateUserDTO) {
-    const user = await this.userService.create(createUserInput)
-    return user
-  }
-
   @Query(() => UserModel, { name: 'user' })
+  @UseGuards(JwtAuthGuard)
   async getUser(@Args('id', { type: () => ID }) id: string) {
     const user = this.userService.getUser(id)
     return user

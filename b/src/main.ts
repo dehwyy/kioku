@@ -12,10 +12,10 @@ const start = async () => {
     const app = await NestFactory.create<NestExpressApplication>(MainModule)
     new ValidationPipe({
       forbidUnknownValues: false,
-    }),
-      await app.listen(PORT, () =>
-        console.log(`http://localhost:${PORT}/graphql`),
-      )
+    })
+    await app.listen(PORT, () =>
+      console.log(`http://localhost:${PORT}/graphql`),
+    )
   } catch (e) {
     console.log(e)
   }

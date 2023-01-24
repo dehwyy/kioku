@@ -20,6 +20,10 @@ export class UserService {
     const user = await this.User.findById(id)
     return user
   }
+  async getUserByEmail(email: string) {
+    const user = await this.User.findOne({ email })
+    return user
+  }
   async updateUserInfo(updateUserInfo: Partial<UpdateUserInfoDTO>) {
     const { id, ...newUserInfo } = updateUserInfo
     const user = this.User.findByIdAndUpdate(updateUserInfo.id, {

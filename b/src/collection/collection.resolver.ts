@@ -15,8 +15,10 @@ import {
 } from '@src/collection/models/collection.dto'
 import QuizCardService from '@src/quizCard/quizCard.service'
 import QuizCardQL from '@src/quizCard/models/quizCard.model'
-import { BadRequestException, HttpException, HttpStatus } from '@nestjs/common'
+import { UseGuards } from '@nestjs/common'
+import { JwtAuthGuard } from '@src/auth/auth.guard'
 
+@UseGuards(JwtAuthGuard)
 @Resolver(() => CollectionQL)
 export default class CollectionResolver {
   constructor(

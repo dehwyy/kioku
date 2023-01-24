@@ -8,6 +8,7 @@ import QuizCardModule from './quizCard/quizCard.module'
 import CollectionModule from '@src/collection/collection.module'
 import { join } from 'path'
 import { UserModule } from './user/user.module'
+import { AuthModule } from './auth/auth.module';
 
 dotenv.config()
 const DATABASE = process.env.DATABASE
@@ -27,6 +28,7 @@ const DATABASE = process.env.DATABASE
     QuizCardModule,
     CollectionModule,
     UserModule,
+    AuthModule,
   ],
 })
 export class MainModule {}

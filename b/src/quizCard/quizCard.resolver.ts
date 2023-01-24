@@ -15,7 +15,10 @@ import {
 } from '@src/quizCard/models/quizCard.dto'
 import CardQL from '@src/card/models/card.model'
 import CardService from '@src/card/card.service'
+import { UseGuards } from '@nestjs/common'
+import { JwtAuthGuard } from '@src/auth/auth.guard'
 
+@UseGuards(JwtAuthGuard)
 @Resolver(of => QuizCard)
 export default class QuizCardResolver {
   constructor(
