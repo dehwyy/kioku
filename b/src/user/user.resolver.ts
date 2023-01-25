@@ -16,8 +16,6 @@ import {
 } from '@src/user/models/user.dto'
 import { UseGuards } from '@nestjs/common'
 import { JwtAuthGuard } from '@src/auth/auth.guard'
-import CardQL from '@src/card/models/card.model'
-import { CreateQuizCardDTO } from '@src/quizCard/models/quizCard.dto'
 import CardService from '@src/card/card.service'
 
 @UseGuards(JwtAuthGuard)

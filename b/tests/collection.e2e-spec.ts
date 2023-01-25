@@ -1,9 +1,14 @@
 import request from 'supertest-graphql'
 import gql from 'graphql-tag'
-import { Test, TestingModule } from '@nestjs/testing'
 import { INestApplication } from '@nestjs/common'
-import { MainModule } from '@src/main.module'
-import { collectionResponse, createMockModule, createQuizCard, deleteUserTest, registerUserTest } from "./utils"
+import {
+  collectionResponse,
+  createCollection,
+  createMockModule,
+  createQuizCard,
+  deleteUserTest,
+  registerUserTest,
+} from "./utils"
 
 
 
@@ -28,17 +33,7 @@ describe('collection e2e', () => {
     idQuizCard1 = dataCard1.createQuizCard._id
     const { data: dataCard2 } = await createQuizCard({ app, quizCardName: 'test222', cards: [], token: jwtToken })
     idQuizCard2 = dataCard2.createQuizCard._id
-    const {data} = await request<Record<"createCollection", collectionResponse>>(app.getHttpServer()).mutate(gql`
-        mutation createCollection($collectionName: String!, $quizCards: [String!]!) {
-            createCollection(collectionName: $collectionName, quizCards: $quizCards) {
-                collectionName
-                _id
-                quizCards {
-                    _id
-                }
-            }
-        }
-    `).variables({collectionName: "testCollection", quizCards: [idQuizCard1]}).set('authorization', `Bearer ${jwtToken}`)
+    const {data} = await createCollection({app, token: jwtToken, idQuizCard1})
     id = data.createCollection._id
     expect(data.createCollection._id).toBeTruthy()
     expect(data.createCollection.quizCards).toBeTruthy()

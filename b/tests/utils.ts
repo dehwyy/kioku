@@ -24,11 +24,17 @@ type createQuizCardArgs = {
   token: string
 }
 type createQuizCardReturnType<T extends string> = Record<T, quizCardFields>
+interface ICreateCollection {
+  app: INestApplication
+  idQuizCard1: string
+  token: string
+}
 export interface collectionResponse {
   _id: string
   collectionName: string
   quizCards: quizCardFields[]
 }
+
 export function createCard<T extends string>({
   face,
   backface,
@@ -50,7 +56,6 @@ export function createCard<T extends string>({
     .variables({ face, backface })
     .set('authorization', `Bearer ${token}`)
 }
-
 export function createQuizCard({
   quizCardName,
   cards,
@@ -79,6 +84,39 @@ export function createQuizCard({
       `,
     )
     .variables({ quizCardName, cards })
+    .set('authorization', `Bearer ${token}`)
+}
+export const createCollection = async ({
+  app,
+  idQuizCard1,
+  token,
+}: ICreateCollection) => {
+  return request<Record<'createCollection', collectionResponse>>(
+    app.getHttpServer(),
+  )
+    .mutate(
+      gql`
+        mutation createCollection(
+          $collectionName: String!
+          $quizCards: [String!]!
+        ) {
+          createCollection(
+            collectionName: $collectionName
+            quizCards: $quizCards
+          ) {
+            collectionName
+            _id
+            quizCards {
+              _id
+            }
+          }
+        }
+      `,
+    )
+    .variables({
+      collectionName: 'testCollection',
+      quizCards: [idQuizCard1],
+    })
     .set('authorization', `Bearer ${token}`)
 }
 
