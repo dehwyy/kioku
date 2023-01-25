@@ -4,6 +4,7 @@ import QuizCardService from './quizCard.service'
 import { MongooseModule } from '@nestjs/mongoose'
 import QuizCardDB, { QuizCardSchema } from './models/quizCard.schema'
 import CardModule from '@src/card/card.module'
+import AuthTokenDB, { AuthTokenSchema } from '@src/auth/models/auth.schema'
 
 @Module({
   imports: [

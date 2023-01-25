@@ -1,11 +1,11 @@
 import * as mongoose from 'mongoose'
 
-export abstract class LoginData {
+export interface ILoginData {
   email: string
   password: string
 }
 
-export abstract class AuthDB {
+export interface IAuthTokenDB {
   userId: mongoose.Types.ObjectId
   token: string
 }

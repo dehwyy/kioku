@@ -4,7 +4,7 @@ import { MainModule } from '@src/main.module'
 import { createCard, deleteUserTest, registerUserTest } from "./utils"
 
 
-describe.only('card e2e', () => {
+describe('card e2e', () => {
   let app: INestApplication
   let id: string
   let jwtToken: string
@@ -30,6 +30,7 @@ describe.only('card e2e', () => {
   it('delete user', async () => {
     const res = await deleteUserTest({app, token: jwtToken, id})
     const {data} = res
+    console.log(res, data)
     expect(data.deleteUser._id).toBeDefined()
     expect(data.deleteUser.password).toBeDefined()
     expect(data.deleteUser.email).toBeDefined()

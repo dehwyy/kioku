@@ -17,4 +17,4 @@ import CollectionModule from '@src/collection/collection.module'
   exports: [UserService],
   providers: [UserResolver, UserService],
 })
-export class UserModule {}
+export default class UserModule {}

@@ -1,8 +1,8 @@
-import { LoginData } from '@src/auth/models/auth.interfaces'
+import { ILoginData } from '@src/auth/models/auth.interfaces'
 import { ArgsType, Field } from '@nestjs/graphql'
 
 @ArgsType()
-export class LoginRequest implements LoginData {
+export class LoginRequest implements ILoginData {
   @Field({ nullable: false })
   password: string
   @Field({ nullable: false })

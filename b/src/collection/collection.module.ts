@@ -6,6 +6,7 @@ import CollectionDB, {
 import CollectionResolver from '@src/collection/collection.resolver'
 import CollectionService from '@src/collection/collection.service'
 import QuizCardModule from '@src/quizCard/quizCard.module'
+import AuthTokenDB, { AuthTokenSchema } from '@src/auth/models/auth.schema'
 
 @Module({
   imports: [

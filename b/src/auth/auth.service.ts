@@ -24,10 +24,13 @@ export class AuthService {
     if (!user) throw new NotFoundException('no user with such email')
     if (!(user.password === password))
       throw new ForbiddenException('wrong password')
-    const token = this.jwt.sign({ email })
-    await this.AuthToken.findByIdAndUpdate(user._id, {
-      $set: { token },
-    })
+    const token = this.jwt.sign({ email, id: user._id })
+    await this.AuthToken.findOneAndUpdate(
+      { userId: user._id },
+      {
+        $set: { token },
+      },
+    )
     return {
       user,
       token,
@@ -36,7 +39,7 @@ export class AuthService {
   async register(registerRequest: CreateUserDTO) {
     const { email } = registerRequest
     const user = await this.userService.create(registerRequest)
-    const token = this.jwt.sign({ email })
+    const token = this.jwt.sign({ email, id: user._id })
     await this.AuthToken.create({ userId: user._id, token })
     return { user, token }
   }

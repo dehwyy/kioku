@@ -5,7 +5,7 @@ import { JwtModule } from '@nestjs/jwt'
 import JwtStrategy from '@src/auth/auth.jwt.strategy'
 import { MongooseModule } from '@nestjs/mongoose'
 import AuthTokenDB, { AuthTokenSchema } from '@src/auth/models/auth.schema'
-import { UserModule } from '@src/user/user.module'
+import UserModule from '@src/user/user.module'
 import * as dotenv from 'dotenv'
 dotenv.config()
 @Module({
