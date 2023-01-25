@@ -3,27 +3,30 @@ import gql from 'graphql-tag'
 import { Test, TestingModule } from '@nestjs/testing'
 import { INestApplication } from '@nestjs/common'
 import { MainModule } from '@src/main.module'
-import { collectionResponse, createQuizCard } from "./utils"
+import { collectionResponse, createMockModule, createQuizCard, deleteUserTest, registerUserTest } from "./utils"
 
 
 
 describe('collection e2e', () => {
   let app: INestApplication
   let id: string
+  let userId: string
   let idQuizCard1: string
   let idQuizCard2: string
+  let jwtToken: string
   beforeEach(async () => {
-    const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [MainModule],
-    }).compile()
-    app = moduleFixture.createNestApplication()
-    await app.init()
+    app = await createMockModule()
   })
-
+  it('register user', async () => {
+    const {data} = await registerUserTest({app})
+    const {token, user} = data.register
+    userId = user._id
+    jwtToken = token
+  })
   it('create collection', async () => {
-    const { data: dataCard1 } = await createQuizCard({ app, quizCardName: "test111", cards: [] })
+    const { data: dataCard1 } = await createQuizCard({ app, quizCardName: "test111", cards: [], token: jwtToken })
     idQuizCard1 = dataCard1.createQuizCard._id
-    const { data: dataCard2 } = await createQuizCard({ app, quizCardName: 'test222', cards: [] })
+    const { data: dataCard2 } = await createQuizCard({ app, quizCardName: 'test222', cards: [], token: jwtToken })
     idQuizCard2 = dataCard2.createQuizCard._id
     const {data} = await request<Record<"createCollection", collectionResponse>>(app.getHttpServer()).mutate(gql`
         mutation createCollection($collectionName: String!, $quizCards: [String!]!) {
@@ -35,7 +38,7 @@ describe('collection e2e', () => {
                 }
             }
         }
-    `).variables({collectionName: "testCollection", quizCards: [idQuizCard1]})
+    `).variables({collectionName: "testCollection", quizCards: [idQuizCard1]}).set('authorization', `Bearer ${jwtToken}`)
     id = data.createCollection._id
     expect(data.createCollection._id).toBeTruthy()
     expect(data.createCollection.quizCards).toBeTruthy()
@@ -46,7 +49,7 @@ describe('collection e2e', () => {
         mutation addToQuizCard($cardId: String!, $id: String!) {
             addToCollection(cardId: $cardId, id: $id)
         }
-    `).variables({cardId: idQuizCard2, id})
+    `).variables({cardId: idQuizCard2, id}).set('authorization', `Bearer ${jwtToken}`)
     expect(data.addToCollection).toMatch(/modified/i)
   })
   it("get quizCard", async () => {
@@ -60,7 +63,7 @@ describe('collection e2e', () => {
                 _id
             }
         }
-    `).variables({id})
+    `).variables({id}).set('authorization', `Bearer ${jwtToken}`)
     expect(data.collection._id).toBeTruthy()
     expect(data.collection.collectionName).toBeTruthy()
     expect(data.collection.quizCards).toBeTruthy()
@@ -71,7 +74,7 @@ describe('collection e2e', () => {
         mutation removeFromCollection($cardId: String!, $id: String!) {
             removeFromCollection(cardId: $cardId, id: $id)
         }
-    `).variables({cardId: idQuizCard2, id})
+    `).variables({cardId: idQuizCard2, id}).set('authorization', `Bearer ${jwtToken}`)
     expect(data.removeFromCollection).toMatch(/modified/i)
   })
 
@@ -86,10 +89,14 @@ describe('collection e2e', () => {
                 _id
             }
         }
-    `).variables({id})
+    `).variables({id}).set('authorization', `Bearer ${jwtToken}`)
     expect(data.deleteCollection._id).toBeTruthy()
     expect(data.deleteCollection.collectionName).toBeTruthy()
     expect(data.deleteCollection.quizCards).toBeTruthy()
     expect(data.deleteCollection.quizCards.length).toBe(1)
+  })
+  it('delete user', async () => {
+    const {data} = await deleteUserTest({app, token: jwtToken, id: userId})
+    expect(data).toBeTruthy()
   })
 })

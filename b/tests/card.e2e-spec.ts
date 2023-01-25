@@ -1,25 +1,28 @@
 import request from 'supertest-graphql'
 import gql from 'graphql-tag'
-import { Test, TestingModule } from '@nestjs/testing'
 import { INestApplication } from '@nestjs/common'
-import { MainModule } from '@src/main.module'
-import { createCard } from "./utils"
+import { createCard, createMockModule, deleteUserTest, registerUserTest } from "./utils"
 
 type cardResponse = Record<string, { _id: string }>
 
 describe('card e2e', () => {
   let app: INestApplication
   let id: string
+  let jwtToken: string
+  let userId: string
   beforeEach(async () => {
-    const moduleFixture: TestingModule = await Test.createTestingModule({
-      imports: [MainModule],
-    }).compile()
-    app = moduleFixture.createNestApplication()
-    await app.init()
+    app = await createMockModule()
+  })
+
+  it('register user', async () => {
+    const {data} = await registerUserTest({app})
+    const {token, user} = data.register
+    userId = user._id
+    jwtToken = token
   })
 
   it('create card', async () => {
-    const { data } = await createCard<"createCard">({ face: 'test', backface: 'test', app }).expectNoErrors()
+    const { data } = await createCard<"createCard">({ face: 'test', backface: 'test', app, token: jwtToken }).expectNoErrors()
     id = data.createCard._id
     expect(id).toBeTruthy()
   })
@@ -29,7 +32,7 @@ describe('card e2e', () => {
       mutation UpdateCard($backface: String!, $face: String!, $id: String!) {
           updateCard(backface: $backface, face: $face, id: $id)
       }
-    `).variables({face: "test1", backface: "test1", id}).expectNoErrors()
+    `).variables({face: "test1", backface: "test1", id}).set('authorization', `Bearer ${jwtToken}`).expectNoErrors()
     expect(data.updateCard).toMatch(/Modified/i)
   })
   it('get card', async () => {
@@ -41,7 +44,7 @@ describe('card e2e', () => {
                 backface
                 face
             }
-        }`).variables({id: id}).expectNoErrors()
+        }`).variables({id: id}).expectNoErrors().set('authorization', `Bearer ${jwtToken}`)
     id = data.card._id
     expect(id).toBeTruthy()
   })
@@ -55,7 +58,11 @@ describe('card e2e', () => {
                 _id
             }
         }
-    `).variables({id}).expectNoErrors()
+    `).variables({id}).set('authorization', `Bearer ${jwtToken}`).expectNoErrors()
     expect(data.deleteCard).toBeTruthy()
+  })
+  it('delete user', async () => {
+    const res = await deleteUserTest({app, token: jwtToken, id: userId})
+    const {data} = res
   })
 })
