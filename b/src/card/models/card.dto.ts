@@ -1,13 +1,12 @@
 import { IsString } from 'class-validator'
 import { ArgsType, Field } from '@nestjs/graphql'
-
-export abstract class CardInputType {
-  face: string
-  backface: string
-}
+import {
+  ICardRequest,
+  ICardUpdateRequest,
+} from '@src/card/models/card.interfaces'
 
 @ArgsType()
-export class CreateCardDTO implements CardInputType {
+export class CreateCardDTO implements ICardRequest {
   @Field({ nullable: false })
   @IsString()
   backface: string
@@ -18,7 +17,7 @@ export class CreateCardDTO implements CardInputType {
 }
 
 @ArgsType()
-export class UpdateCardDTO extends CreateCardDTO {
+export class UpdateCardDTO extends CreateCardDTO implements ICardUpdateRequest {
   @Field({ nullable: false })
   id: string
 }

@@ -1,8 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
-import { CardInputType } from './card.dto'
+import { ICardRequest } from '@src/card/models/card.interfaces'
 
 @Schema({ collection: 'cards' })
-export default class CardDB implements CardInputType {
+export default class CardDB implements ICardRequest {
   @Prop({ isRequired: true })
   face: string
 
