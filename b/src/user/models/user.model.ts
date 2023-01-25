@@ -36,15 +36,9 @@ export default class UserModel extends UserProto {
 }
 
 @ObjectType({ description: 'user model' })
-class UserCreateUserQL extends UserProto {
-  @Field({ nullable: false })
-  userId: string
-}
-
-@ObjectType({ description: 'user model' })
 export class UserCreateQL {
   @Field({ nullable: false })
   token: string
   @Field({ nullable: false })
-  user: UserCreateUserQL
+  user: UserModel
 }

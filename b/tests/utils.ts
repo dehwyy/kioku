@@ -5,6 +5,22 @@ import { INestApplication } from '@nestjs/common'
 type cardDataType = { _id: string; face: string; backface: string }
 type createCardReturnType<T extends string> = Record<T, cardDataType>
 type createCardArgs = { face: string; backface: string; app: INestApplication }
+export interface quizCardFields {
+  _id: string
+  quizCardName: string
+  cards: cardDataType[]
+}
+type createQuizCardArgs = {
+  cards: string[]
+  quizCardName: string
+  app: INestApplication
+}
+type createQuizCardReturnType<T extends string> = Record<T, quizCardFields>
+export interface collectionResponse {
+  _id: string
+  collectionName: string
+  quizCards: quizCardFields[]
+}
 export function createCard<T extends string>({
   face,
   backface,
@@ -24,17 +40,7 @@ export function createCard<T extends string>({
     )
     .variables({ face, backface })
 }
-export interface quizCardFields {
-  _id: string
-  quizCardName: string
-  cards: cardDataType[]
-}
-type createQuizCardArgs = {
-  cards: string[]
-  quizCardName: string
-  app: INestApplication
-}
-type createQuizCardReturnType<T extends string> = Record<T, quizCardFields>
+
 export function createQuizCard({
   quizCardName,
   cards,
@@ -64,8 +70,26 @@ export function createQuizCard({
     .variables({ quizCardName, cards })
 }
 
-export interface collectionResponse {
-  _id: string
-  collectionName: string
-  quizCards: quizCardFields[]
+export const registerUser = ({ app }: { app: INestApplication }) => {
+  return request<createQuizCardReturnType<'createQuizCard'>>(
+    app.getHttpServer(),
+  ).mutate(
+    gql`
+      mutation {
+        register(
+          cards: []
+          quizCards: []
+          collections: []
+          email: "1"
+          username: "1"
+          password: "1"
+        ) {
+          token
+          user {
+            userId
+          }
+        }
+      }
+    `,
+  )
 }

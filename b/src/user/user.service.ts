@@ -18,6 +18,9 @@ export class UserService {
 
   async getUser(id: string) {
     const user = await this.User.findById(id)
+      .populate('cards')
+      .populate('collections')
+      .populate('quizCards')
     return user
   }
   async getUserByEmail(email: string) {

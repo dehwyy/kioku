@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common'
+import {
+  ForbiddenException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common'
 import { JwtService } from '@nestjs/jwt'
 import { LoginRequest } from '@src/auth/models/auth.dto'
 import { InjectModel } from '@nestjs/mongoose'
@@ -15,9 +19,11 @@ export class AuthService {
     @InjectModel(AuthTokenDB.name) private AuthToken: Model<AuthTokenDB>,
   ) {}
   async login(loginRequest: LoginRequest) {
-    const { email } = loginRequest
+    const { email, password } = loginRequest
     const user = await this.userService.getUserByEmail(email)
     if (!user) throw new NotFoundException('no user with such email')
+    if (!(user.password === password))
+      throw new ForbiddenException('wrong password')
     const token = this.jwt.sign({ email })
     await this.AuthToken.findByIdAndUpdate(user._id, {
       $set: { token },

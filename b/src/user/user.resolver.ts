@@ -1,4 +1,13 @@
-import { Resolver, Query, Mutation, Args, Int, ID } from '@nestjs/graphql'
+import {
+  Resolver,
+  Query,
+  Mutation,
+  Args,
+  Int,
+  ID,
+  ResolveField,
+  Parent,
+} from '@nestjs/graphql'
 import { UserService } from './user.service'
 import UserModel from '@src/user/models/user.model'
 import {
@@ -7,14 +16,19 @@ import {
 } from '@src/user/models/user.dto'
 import { UseGuards } from '@nestjs/common'
 import { JwtAuthGuard } from '@src/auth/auth.guard'
+import CardQL from '@src/card/models/card.model'
+import { CreateQuizCardDTO } from '@src/quizCard/models/quizCard.dto'
+import CardService from '@src/card/card.service'
 
 @UseGuards(JwtAuthGuard)
 @Resolver(() => UserModel)
 export class UserResolver {
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private CardService: CardService,
+  ) {}
 
   @Query(() => UserModel, { name: 'user' })
-  @UseGuards(JwtAuthGuard)
   async getUser(@Args('id', { type: () => ID }) id: string) {
     const user = this.userService.getUser(id)
     return user
