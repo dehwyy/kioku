@@ -1,8 +1,12 @@
 import { ArgsType, Field } from '@nestjs/graphql'
 import { IsString } from 'class-validator'
+import {
+  IQuizCardBase,
+  IUpdateCardRequest,
+} from '@src/quizCard/models/quizCard.interfaces'
 
 @ArgsType()
-export class CreateQuizCardDTO {
+export class CreateQuizCardDTO implements IQuizCardBase<string> {
   @Field({ nullable: false })
   @IsString()
   quizCardName: string
@@ -12,7 +16,7 @@ export class CreateQuizCardDTO {
 }
 
 @ArgsType()
-export class UpdateQuizCardDTO {
+export class UpdateQuizCardDTO implements IUpdateCardRequest {
   @Field({ description: 'quizCardId' })
   id: string
 
