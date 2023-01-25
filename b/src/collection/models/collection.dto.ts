@@ -1,7 +1,11 @@
 import { ArgsType, Field } from '@nestjs/graphql'
+import {
+  ICollectionBase,
+  IUpdateQuizCardRequest,
+} from '@src/collection/models/collection.interfaces'
 
 @ArgsType()
-export class CreateCollectionDTO {
+export class CreateCollectionDTO implements ICollectionBase<string> {
   @Field({ nullable: false })
   collectionName: string
 
@@ -10,7 +14,7 @@ export class CreateCollectionDTO {
 }
 
 @ArgsType()
-export class UpdateCollectionDTO {
+export class UpdateCollectionDTO implements IUpdateQuizCardRequest {
   @Field({ description: 'collectionId' })
   id: string
 

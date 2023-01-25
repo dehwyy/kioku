@@ -38,7 +38,7 @@ export default class CollectionResolver {
     return quizCards
   }
 
-  @Mutation(() => CollectionQL, { name: 'deleteCollection' })
+  @Mutation(() => CollectionQL)
   async deleteCollection(@Args('id', { type: () => ID }) id: string) {
     const collection = this.collectionService.deleteCollection(id)
     return collection
