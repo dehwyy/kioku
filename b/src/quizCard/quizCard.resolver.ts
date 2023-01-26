@@ -17,6 +17,7 @@ import CardQL from '@src/card/models/card.model'
 import CardService from '@src/card/card.service'
 import { UseGuards } from '@nestjs/common'
 import { JwtAuthGuard } from '@src/auth/auth.guard'
+import { UpdateLikesDTO } from '@src/global/dto/like.dto'
 
 @UseGuards(JwtAuthGuard)
 @Resolver(of => QuizCard)
@@ -63,4 +64,18 @@ export default class QuizCardResolver {
     const quizCard = await this.quizCardService.deleteQuizCard(quizCardId)
     return quizCard
   }
+
+  @Mutation(returns => CardQL, { name: 'likeCard' })
+  async updateCardLikes(@Args() cardLikesDTO: UpdateLikesDTO) {
+    const card = await this.quizCardService.addToLikes(cardLikesDTO)
+    return card
+  }
+
+  @Mutation(returns => CardQL, { name: 'dislikeCard' })
+  async updateCardDislikes(@Args() cardDislikesDTO: UpdateLikesDTO) {
+    const card = await this.quizCardService.removeFromLikes(cardDislikesDTO)
+    return card
+  }
 }
+
+//Занимаюсь программированием. Основной стэк - фуллстак веб-разработка (предпочитаю typescript) : писал на React, Vue, Next, Express, Nest; работал с sequelize(pgsql), mongoose, websocket, Canvas, Redux(rtk), MobX, VueX, pinia; знаю огромное количество сторонних библиотек(тестирование, стилизация компонентов, axios, rtk query,  apollo,  secure JWT, passportjs auth,  конфиги - eslint, prettier, vite, esbuild, webpack, ). Знаком с основами компьютерных сетей(протоколы, модели). Дополнительно знаю Python, https://github.com/dehwyy

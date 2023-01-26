@@ -1,23 +1,8 @@
-import * as mongoose from 'mongoose'
-
-export interface ICardRequest {
+export interface ICardResponse {
   face: string
   backface: string
 }
 
-export interface ICardDB extends ICardRequest {
-  likes: mongoose.Types.ObjectId[]
-}
-
-export interface IUpdateCardLikes {
-  id: string
-  userId: string
-}
-
-export interface ICardQL extends ICardRequest {
-  _id: string
-}
-
-export interface ICardUpdateRequest extends ICardRequest {
+export interface ICardUpdateRequest extends ICardResponse {
   id: string
 }

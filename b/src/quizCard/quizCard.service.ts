@@ -7,6 +7,7 @@ import {
   UpdateQuizCardDTO,
 } from '@src/quizCard/models/quizCard.dto'
 import CardService from '@src/card/card.service'
+import { UpdateLikesDTO } from '@src/global/dto/like.dto'
 
 @Injectable()
 export default class QuizCardService {
@@ -54,5 +55,21 @@ export default class QuizCardService {
       quizCards.push(quizCard)
     }
     return quizCards
+  }
+
+  async addToLikes(cardNewLike: UpdateLikesDTO) {
+    const { id, userId } = cardNewLike
+    const quizCard = await this.QuizCard.findByIdAndUpdate(id, {
+      $addToSet: { likes: userId },
+    })
+    return quizCard
+  }
+
+  async removeFromLikes(cardRemoveLike: UpdateLikesDTO) {
+    const { id, userId } = cardRemoveLike
+    const quizCard = await this.QuizCard.findByIdAndUpdate(id, {
+      $pull: { likes: userId },
+    })
+    return quizCard
   }
 }

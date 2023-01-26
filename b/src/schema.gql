@@ -7,12 +7,14 @@ type CardQL {
   _id: ID!
   backface: String!
   face: String!
+  likes: [String!]!
 }
 
 """CollectionModel"""
 type CollectionQL {
   _id: ID!
   collectionName: String!
+  likes: [String!]!
   quizCards: [QuizCardQL]!
 }
 
@@ -73,6 +75,7 @@ type Query {
 type QuizCardQL {
   _id: ID!
   cards: [CardQL]!
+  likes: [String!]!
   quizCardName: String!
 }
 

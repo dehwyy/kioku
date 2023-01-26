@@ -17,6 +17,8 @@ import QuizCardService from '@src/quizCard/quizCard.service'
 import QuizCardQL from '@src/quizCard/models/quizCard.model'
 import { UseGuards } from '@nestjs/common'
 import { JwtAuthGuard } from '@src/auth/auth.guard'
+import CardQL from '@src/card/models/card.model'
+import { UpdateLikesDTO } from '@src/global/dto/like.dto'
 
 @UseGuards(JwtAuthGuard)
 @Resolver(() => CollectionQL)
@@ -68,5 +70,17 @@ export default class CollectionResolver {
   async createCollection(@Args() createCollection: CreateCollectionDTO) {
     const collection = this.collectionService.createCollection(createCollection)
     return collection
+  }
+
+  @Mutation(returns => CardQL, { name: 'likeCard' })
+  async updateCardLikes(@Args() cardLikesDTO: UpdateLikesDTO) {
+    const card = await this.collectionService.addToLikes(cardLikesDTO)
+    return card
+  }
+
+  @Mutation(returns => CardQL, { name: 'dislikeCard' })
+  async updateCardDislikes(@Args() cardDislikesDTO: UpdateLikesDTO) {
+    const card = await this.collectionService.removeFromLikes(cardDislikesDTO)
+    return card
   }
 }

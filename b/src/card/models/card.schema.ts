@@ -1,10 +1,11 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
-import { ICardDB } from '@src/card/models/card.interfaces'
+import { ICardResponse } from '@src/card/models/card.interfaces'
 import mongoose from 'mongoose'
 import UserDB from '@src/user/models/user.schema'
+import { IModelWithLikesDB } from '@src/global/types/like'
 
 @Schema({ collection: 'cards' })
-export default class CardDB implements ICardDB {
+export default class CardDB implements IModelWithLikesDB<ICardResponse> {
   @Prop({ isRequired: true })
   face: string
 

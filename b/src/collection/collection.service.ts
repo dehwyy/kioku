@@ -6,6 +6,7 @@ import {
   CreateCollectionDTO,
   UpdateCollectionDTO,
 } from '@src/collection/models/collection.dto'
+import { UpdateLikesDTO } from '@src/global/dto/like.dto'
 
 @Injectable()
 export default class CollectionService {
@@ -41,6 +42,22 @@ export default class CollectionService {
 
   async createCollection(collectionData: CreateCollectionDTO) {
     const collection = await this.Collection.create(collectionData)
+    return collection
+  }
+
+  async addToLikes(cardNewLike: UpdateLikesDTO) {
+    const { id, userId } = cardNewLike
+    const collection = await this.Collection.findByIdAndUpdate(id, {
+      $addToSet: { likes: userId },
+    })
+    return collection
+  }
+
+  async removeFromLikes(cardRemoveLike: UpdateLikesDTO) {
+    const { id, userId } = cardRemoveLike
+    const collection = await this.Collection.findByIdAndUpdate(id, {
+      $pull: { likes: userId },
+    })
     return collection
   }
 }

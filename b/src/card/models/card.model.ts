@@ -1,8 +1,9 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql'
-import { ICardQL } from '@src/card/models/card.interfaces'
+import { IModelWithLikesQL } from '@src/global/types/like'
+import { ICardResponse } from '@src/card/models/card.interfaces'
 
 @ObjectType({ description: 'CardModel' })
-export default class CardQL implements ICardQL {
+export default class CardQL implements IModelWithLikesQL<ICardResponse> {
   @Field(type => ID)
   _id: string
 
@@ -11,4 +12,7 @@ export default class CardQL implements ICardQL {
 
   @Field({ nullable: false })
   backface: string
+
+  @Field(type => [String])
+  likes: string[]
 }
