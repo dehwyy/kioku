@@ -38,6 +38,8 @@ type Mutation {
   deleteCollection(id: ID!): CollectionQL!
   deleteQuizCard(id: ID!): QuizCardQL!
   deleteUser(id: ID!): UserModel!
+  dislikeCard(id: String!, userId: String!): CardQL!
+  likeCard(id: String!, userId: String!): CardQL!
   login(email: String!, password: String!): UserCreateQL!
   pushToUserList(cards: [String], collections: [String], id: ID!, quizCards: [String]): UserModel!
   register(cards: [String]!, collections: [String]!, email: String!, password: String!, quizCards: [String]!, username: String!): UserCreateQL!

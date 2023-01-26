@@ -2,7 +2,11 @@ import { Injectable } from '@nestjs/common'
 import { InjectModel } from '@nestjs/mongoose'
 import CardDB from './models/card.schema'
 import { Model, ObjectId } from 'mongoose'
-import { CreateCardDTO, UpdateCardDTO } from '@src/card/models/card.dto'
+import {
+  CreateCardDTO,
+  UpdateCardDTO,
+  UpdateCardLikesDTO,
+} from '@src/card/models/card.dto'
 
 @Injectable()
 export default class CardService {
@@ -36,6 +40,22 @@ export default class CardService {
     const { id, face, backface } = cardUpdateData
     const card = await this.CardModel.findByIdAndUpdate(id, {
       $set: { face, backface },
+    })
+    return card
+  }
+
+  async addToLikes(cardNewLike: UpdateCardLikesDTO) {
+    const { id, userId } = cardNewLike
+    const card = await this.CardModel.findByIdAndUpdate(id, {
+      $addToSet: { likes: userId },
+    })
+    return card
+  }
+
+  async removeFromLikes(cardRemoveLike: UpdateCardLikesDTO) {
+    const { id, userId } = cardRemoveLike
+    const card = await this.CardModel.findByIdAndUpdate(id, {
+      $pull: { likes: userId },
     })
     return card
   }

@@ -3,6 +3,7 @@ import { ArgsType, Field } from '@nestjs/graphql'
 import {
   ICardRequest,
   ICardUpdateRequest,
+  IUpdateCardLikes,
 } from '@src/card/models/card.interfaces'
 
 @ArgsType()
@@ -14,6 +15,14 @@ export class CreateCardDTO implements ICardRequest {
   @Field({ nullable: false })
   @IsString()
   face: string
+}
+
+@ArgsType()
+export class UpdateCardLikesDTO implements IUpdateCardLikes {
+  @Field({ nullable: false })
+  id: string
+  @Field({ nullable: false })
+  userId: string
 }
 
 @ArgsType()

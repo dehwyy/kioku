@@ -1,7 +1,11 @@
 import CardQL from './models/card.model'
 import { Args, ID, Mutation, Query, Resolver } from '@nestjs/graphql'
 import CardService from './card.service'
-import { CreateCardDTO, UpdateCardDTO } from '@src/card/models/card.dto'
+import {
+  CreateCardDTO,
+  UpdateCardDTO,
+  UpdateCardLikesDTO,
+} from '@src/card/models/card.dto'
 import { UseGuards } from '@nestjs/common'
 import { JwtAuthGuard } from '@src/auth/auth.guard'
 
@@ -32,5 +36,17 @@ export default class CardResolver {
   async updateCard(@Args() updateCardData: UpdateCardDTO) {
     const isModified = await this.cardService.updateCard(updateCardData)
     return isModified ? `Modified card ${updateCardData.id}` : 'error'
+  }
+
+  @Mutation(returns => CardQL, { name: 'likeCard' })
+  async updateCardLikes(@Args() cardLikesDTO: UpdateCardLikesDTO) {
+    const card = await this.cardService.addToLikes(cardLikesDTO)
+    return card
+  }
+
+  @Mutation(returns => CardQL, { name: 'dislikeCard' })
+  async updateCardDislikes(@Args() cardDislikesDTO: UpdateCardLikesDTO) {
+    const card = await this.cardService.removeFromLikes(cardDislikesDTO)
+    return card
   }
 }
