@@ -18,7 +18,6 @@ import { UseGuards } from '@nestjs/common'
 import { JwtAuthGuard } from '@src/auth/auth.guard'
 import CardService from '@src/card/card.service'
 
-@UseGuards(JwtAuthGuard)
 @Resolver(() => UserModel)
 export class UserResolver {
   constructor(
@@ -28,7 +27,8 @@ export class UserResolver {
 
   @Query(() => UserModel, { name: 'user' })
   async getUser(@Args('id', { type: () => ID }) id: string) {
-    const user = this.userService.getUser(id)
+    const user = await this.userService.getUser(id)
+    console.log(id, user)
     return user
   }
 

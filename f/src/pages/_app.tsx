@@ -5,6 +5,8 @@ import "../styles/app.scss"
 import Wrapper from "../components/Wrapper"
 import { createTheme, ThemeProvider } from "@mui/material"
 import Head from "next/head"
+import { ApolloProvider } from "@apollo/client"
+import { useApollo } from "../tools/apolloClient"
 
 const ff = Font({
   style: "normal",
@@ -39,17 +41,20 @@ const defaultTheme = createTheme({
   },
 })
 export default function MyApp({ Component, pageProps }: AppProps) {
+  const apollo = useApollo(pageProps)
   return (
     <>
       <Head>
         <title>useMemorize</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       </Head>
-      <ThemeProvider theme={defaultTheme}>
-        <Wrapper font={ff.className}>
-          <Component {...pageProps} />
-        </Wrapper>
-      </ThemeProvider>
+      <ApolloProvider client={apollo}>
+        <ThemeProvider theme={defaultTheme}>
+          <Wrapper font={ff.className}>
+            <Component {...pageProps} />
+          </Wrapper>
+        </ThemeProvider>
+      </ApolloProvider>
     </>
   )
 }

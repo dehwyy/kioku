@@ -4,10 +4,21 @@ import localFont from "@next/font/local"
 import Image from "next/image"
 import { useRouter } from "next/router"
 import useTransitionHook from "../hooks/useTransitionHook"
+import { gql, useQuery } from "@apollo/client"
+
+const GET_USER = gql`
+  query getUser($id: ID!) {
+    user(id: $id) {
+      username
+      _id
+    }
+  }
+`
 
 const TextFont = localFont({ src: "../fonts/galey-r.ttf", display: "swap" })
 const TitleFont = localFont({ src: "../fonts/aquire-bold.otf", display: "swap" })
 const Index = () => {
+  const { data } = useQuery(GET_USER, { variables: { id: "63d240bc9f62a7f60752b7b1" } })
   const { ref: firstBlockRef, styleTransition: firstBlockTransition } = useTransitionHook({ delay: 1500 })
   const { ref: secondBlockRef, styleTransition: secondBlockTransition } = useTransitionHook()
   const router = useRouter()
@@ -42,3 +53,15 @@ const Index = () => {
 }
 
 export default Index
+
+// export async function getStaticProps() {
+//   const apolloClient = initializeApollo()
+//   const a = await apolloClient.query({
+//     query: UserRequest.createUser,
+//     variables: {
+//       id: "63d240bc9f62a7f60752b7b1",
+//     },
+//   })
+//   console.log(a.data)
+//   return addApolloState(apolloClient, { props: {} })
+// }

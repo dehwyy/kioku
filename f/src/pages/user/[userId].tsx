@@ -8,6 +8,7 @@ import useTransitionHook from "../../hooks/useTransitionHook"
 
 const LogoFont = localFont({ src: "../../fonts/galey-r.ttf" })
 const profileImage = "https://cdn.icon-icons.com/icons2/2406/PNG/512/user_account_icon_145918.png"
+
 const UserId = () => {
   const [value, setValue] = useState<TabsValuesT>("collections")
   const { ref, styleTransition } = useTransitionHook({ delay: 1500 })
@@ -33,5 +34,4 @@ const UserId = () => {
     </Box>
   )
 }
-
 export default UserId

@@ -1,7 +1,6 @@
 import React, { FC } from "react"
 import Navbar from "./Navbar"
 import { Box, Link } from "@mui/material"
-import { useRouter } from "next/router"
 import { GitHub } from "@mui/icons-material"
 
 interface wrapperProps {
@@ -10,8 +9,6 @@ interface wrapperProps {
 }
 
 const Wrapper: FC<wrapperProps> = ({ children, font }) => {
-  const { pathname } = useRouter()
-  const notIsLoginForm = pathname !== "/login"
   return (
     <Box
       className={font}
@@ -21,7 +18,7 @@ const Wrapper: FC<wrapperProps> = ({ children, font }) => {
         width: "100vw",
         overflowX: "hidden",
       }}>
-      {notIsLoginForm && <Navbar />}
+      <Navbar />
       <Box p="80px 0 0" minWidth="300px" maxWidth="1024px" m="0 auto">
         {children}
       </Box>

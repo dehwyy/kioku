@@ -1,0 +1,93 @@
+"""CardModel"""
+type CardQL {
+    _id: ID!
+    backface: String!
+    face: String!
+    likes: [String!]!
+}
+
+"""CollectionModel"""
+type CollectionQL {
+    _id: ID!
+    collectionName: String!
+    likes: [String!]!
+    quizCards: [QuizCardQL]!
+}
+
+type Mutation {
+    addToCollection(
+        """quizCardId"""
+        cardId: String!
+
+        """collectionId"""
+        id: String!
+    ): String!
+    addToQuizCard(
+        """cardId"""
+        cardId: String!
+
+        """quizCardId"""
+        id: String!
+    ): String!
+    createCard(backface: String!, face: String!): CardQL!
+    createCollection(collectionName: String!, quizCards: [String!]!): CollectionQL!
+    createQuizCard(cards: [String]!, quizCardName: String!): QuizCardQL!
+    deleteCard(id: ID!): CardQL!
+    deleteCollection(id: ID!): CollectionQL!
+    deleteQuizCard(id: ID!): QuizCardQL!
+    deleteUser(id: ID!): UserModel!
+    dislikeCard(id: String!, userId: String!): CardQL!
+    likeCard(id: String!, userId: String!): CardQL!
+    login(email: String!, password: String!): UserCreateQL!
+    pushToUserList(cards: [String], collections: [String], id: ID!, quizCards: [String]): UserModel!
+    register(cards: [String]!, collections: [String]!, email: String!, password: String!, quizCards: [String]!, username: String!): UserCreateQL!
+    removeFromCollection(
+        """quizCardId"""
+        cardId: String!
+
+        """collectionId"""
+        id: String!
+    ): String!
+    removeFromQuizCard(
+        """cardId"""
+        cardId: String!
+
+        """quizCardId"""
+        id: String!
+    ): String!
+    removeFromUserList(cards: [String], collections: [String], id: ID!, quizCards: [String]): UserModel!
+    updateCard(backface: String!, face: String!, id: String!): String!
+    updateUser(email: String, id: ID!, password: String, username: String): UserModel!
+}
+
+type Query {
+    card(id: ID!): CardQL!
+    collection(id: ID!): CollectionQL!
+    quizCard(id: ID!): QuizCardQL!
+    user(id: ID!): UserModel!
+}
+
+"""QuizCardModel"""
+type QuizCardQL {
+    _id: ID!
+    cards: [CardQL]!
+    likes: [String!]!
+    quizCardName: String!
+}
+
+"""user model"""
+type UserCreateQL {
+    token: String!
+    user: UserModel!
+}
+
+"""user model"""
+type UserModel {
+    _id: String!
+    cards: [CardQL]!
+    collections: [CollectionQL]!
+    email: String!
+    password: String!
+    quizCards: [QuizCardQL]!
+    username: String!
+}
