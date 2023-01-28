@@ -7,7 +7,6 @@ interface wrapperProps {
   children: React.ReactNode
   font: string
 }
-
 const Wrapper: FC<wrapperProps> = ({ children, font }) => {
   return (
     <Box

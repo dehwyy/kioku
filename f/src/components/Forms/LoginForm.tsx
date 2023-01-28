@@ -3,18 +3,30 @@ import { Formik, Form, Field } from "formik"
 import { TextField } from "formik-mui"
 import * as React from "react"
 import { useRouter } from "next/router"
+import { useMutation } from "@apollo/client"
+import { UserRequest } from "../../gql/user.gql"
 
 const LoginForm = () => {
   const router = useRouter()
+  const [loginUser] = useMutation(UserRequest.loginUser)
+  const loginUserAndSetToken = async <T extends Record<string, string>>({ values }: { values: T }) => {
+    const { data } = await loginUser({ variables: values })
+    const { user, token } = data.login
+    localStorage.setItem("token", token)
+    return user._id
+  }
   return (
     <Formik
       initialValues={{ email: "", password: "" }}
-      onSubmit={(values, { setSubmitting, resetForm }) => {
-        setTimeout(() => {
-          setSubmitting(false)
-          resetForm()
-          router.push("/user/1")
-        }, 500)
+      onSubmit={async (values, { setSubmitting, resetForm }) => {
+        const userId = await loginUserAndSetToken<typeof values>({ values })
+        setSubmitting(false)
+        resetForm()
+        console.log(userId)
+        if (!userId) {
+          console.log("ERROR") // Change to 'error' label
+        }
+        await router.push(`/user/${userId}`)
       }}>
       {({ isSubmitting }) =>
         isSubmitting ? (
