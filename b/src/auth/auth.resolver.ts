@@ -15,8 +15,8 @@ export class AuthResolver {
 
   @Mutation(() => UserCreateQL)
   async register(@Args() createUserInput: CreateUserDTO) {
-    console.log(1)
     const user = await this.authService.register(createUserInput)
     return user
   }
 }
+const a = '1'

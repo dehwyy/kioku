@@ -10,8 +10,10 @@ import { UserRequest } from "../../gql/user.gql"
 const RegForm = () => {
   const router = useRouter()
   const [createUser] = useMutation(UserRequest.createUser)
+  const [checkIfUserWithSuchUsernameAlreadyExists, { loading }] = useMutation(UserRequest.getUserByUsername)
   const createUserAndSetToken = async <T extends Record<string, string>>({ values }: { values: T }) => {
     const { data } = await createUser({ variables: values })
+    if (!data) return
     const { user, token } = data.register
     localStorage.setItem("token", token)
     return user._id
@@ -21,9 +23,28 @@ const RegForm = () => {
       initialValues={{ email: "", password: "", username: "" }}
       onSubmit={async (values, { setSubmitting, resetForm }) => {
         const newUserId = await createUserAndSetToken<typeof values>({ values })
+        if (newUserId) {
+          await router.push(`/user/${newUserId}`)
+        }
         setSubmitting(false)
         resetForm()
-        await router.push(`/user/${newUserId}`)
+      }}
+      validate={async values => {
+        const errors: Partial<typeof values> = {}
+        if (!values.email) {
+          errors.email = "Required"
+        } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+          errors.email = "Invalid email address"
+        }
+        if (!values.username) {
+          errors.username = "Required"
+        }
+        const { data } = await checkIfUserWithSuchUsernameAlreadyExists({ variables: { username: values.username } })
+        if (data.userByAttr) {
+          errors.username = "User with such username already exists"
+          return errors
+        }
+        return errors
       }}>
       {({ isSubmitting }) =>
         isSubmitting ? (

@@ -14,22 +14,21 @@ import {
   UpdateUserInfoDTO,
   UpdateUserListsDTO,
 } from '@src/user/models/user.dto'
-import { UseGuards } from '@nestjs/common'
-import { JwtAuthGuard } from '@src/auth/auth.guard'
-import CardService from '@src/card/card.service'
 
 @Resolver(() => UserModel)
 export class UserResolver {
-  constructor(
-    private userService: UserService,
-    private CardService: CardService,
-  ) {}
+  constructor(private userService: UserService) {}
 
   @Query(() => UserModel, { name: 'user' })
   async getUser(@Args('id', { type: () => ID }) id: string) {
     const user = await this.userService.getUser(id)
-    console.log(id, user)
     return user
+  }
+
+  @Mutation(() => Boolean, { name: 'userByAttr' })
+  async getUserByAttr(@Args('username') username: string) {
+    const user = await this.userService.getUserByUserAttrs(username)
+    return Boolean(user)
   }
 
   @Mutation(() => UserModel)

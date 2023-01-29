@@ -62,6 +62,7 @@ type Mutation {
   removeFromUserList(cards: [String], collections: [String], id: ID!, quizCards: [String]): UserModel!
   updateCard(backface: String!, face: String!, id: String!): String!
   updateUser(email: String, id: ID!, password: String, username: String): UserModel!
+  userByAttr(username: String!): Boolean!
 }
 
 type Query {

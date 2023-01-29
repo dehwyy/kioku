@@ -5,11 +5,17 @@ import Collections from "../../components/Collections"
 import localFont from "@next/font/local"
 import CardsWrapper from "../../components/Cards"
 import useTransitionHook from "../../hooks/useTransitionHook"
+import { addApolloState, initializeApollo } from "../../tools/apolloClient"
+import { UserRequest } from "../../gql/user.gql"
+import { useQuery } from "@apollo/client"
+import { useRouter } from "next/router"
 
 const LogoFont = localFont({ src: "../../fonts/galey-r.ttf" })
 const profileImage = "https://cdn.icon-icons.com/icons2/2406/PNG/512/user_account_icon_145918.png"
 
 const UserId = () => {
+  const router = useRouter()
+  const { data } = useQuery(UserRequest.getUserById, { variables: { userId: router.query.userId } })
   const [value, setValue] = useState<TabsValuesT>("collections")
   const { ref, styleTransition } = useTransitionHook({ delay: 1500 })
   const handleChange = (event: React.SyntheticEvent, newValue: TabsValuesT) => {
@@ -21,7 +27,7 @@ const UserId = () => {
         <Image src={profileImage} alt="image" width="200" height="200" />
         <Box display="flex" flexDirection="column" justifyContent="space-between">
           <Typography pt="50px" style={LogoFont.style} fontWeight="600" fontSize="2rem">
-            Username
+            {data.user.username}
           </Typography>
           <Tabs value={value} onChange={handleChange} sx={{ pb: "25px" }} data-cy="profileTabs">
             <Tab value="collections" label="collections" data-cy="collections" />
@@ -35,3 +41,14 @@ const UserId = () => {
   )
 }
 export default UserId
+
+export async function getServerSideProps({ req, res, resolvedUrl }) {
+  const apolloClient = initializeApollo()
+  await apolloClient.query({
+    query: UserRequest.getUserById,
+    variables: {
+      userId: resolvedUrl.split("/").at(-1),
+    },
+  })
+  return addApolloState(apolloClient, { props: {} })
+}

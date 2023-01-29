@@ -18,12 +18,13 @@ export class UserService {
 
   async getUser(id: string) {
     const user = await this.User.findById(id)
-      .populate('cards')
       .populate('collections')
       .populate('quizCards')
+      .populate({ path: 'cards', select: 'face' })
+    console.log(user)
     return user
   }
-  async getUserByEmail(email: string) {
+  async getUserByUserAttrs(email: string) {
     const user = await this.User.findOne({ email })
     return user
   }

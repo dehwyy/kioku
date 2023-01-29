@@ -20,7 +20,7 @@ export class AuthService {
   ) {}
   async login(loginRequest: LoginRequest) {
     const { email, password } = loginRequest
-    const user = await this.userService.getUserByEmail(email)
+    const user = await this.userService.getUserByUserAttrs(email)
     if (!user) throw new NotFoundException('no user with such email')
     if (!(user.password === password))
       throw new ForbiddenException('wrong password')

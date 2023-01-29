@@ -22,11 +22,48 @@ const loginUser = gql`
   }
 `
 
+const getUserById = gql`
+  query getUser($userId: ID!) {
+    user(id: $userId) {
+      email
+      username
+      collections {
+        likes
+        collectionName
+        quizCards {
+          _id
+          quizCardName
+          likes
+          cards {
+            _id
+          }
+        }
+      }
+      quizCards {
+        likes
+        quizCardName
+      }
+    }
+  }
+`
+
+const getUserByUsername = gql`
+  mutation getUserByUsername($username: String!) {
+    userByAttr(username: $username)
+  }
+`
+
 export class UserRequest {
   static get createUser() {
     return createUser
   }
   static get loginUser() {
     return loginUser
+  }
+  static get getUserById() {
+    return getUserById
+  }
+  static get getUserByUsername() {
+    return getUserByUsername
   }
 }
