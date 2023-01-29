@@ -24,9 +24,6 @@ export class CreateUserDTO implements UserBasicData, UserListsData {
   quizCards: string[]
 
   @Field(type => [String], { nullable: 'items' })
-  cards: string[]
-
-  @Field(type => [String], { nullable: 'items' })
   collections: string[]
 }
 
@@ -34,9 +31,6 @@ export class CreateUserDTO implements UserBasicData, UserListsData {
 export class UpdateUserListsDTO implements UpdateUserLists {
   @Field(type => [String], { nullable: 'itemsAndList' })
   quizCards: string[]
-
-  @Field(type => [String], { nullable: 'itemsAndList' })
-  cards: string[]
 
   @Field(type => [String], { nullable: 'itemsAndList' })
   collections: string[]

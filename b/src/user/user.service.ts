@@ -20,7 +20,6 @@ export class UserService {
     const user = await this.User.findById(id)
       .populate('collections')
       .populate('quizCards')
-      .populate({ path: 'cards', select: 'face' })
     console.log(user)
     return user
   }

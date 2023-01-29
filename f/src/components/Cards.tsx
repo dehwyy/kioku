@@ -10,12 +10,6 @@ const TitleFont = localFont({ src: "../fonts/galey-r.ttf" })
 const FieldFont = localFont({ src: "../fonts/gp-reg.otf" })
 
 const CardsWrapper = () => {
-  const QuizCards = [
-    { title: "Japanese kanji", id: 1, wordsCount: 101, likes: 122 },
-    { title: "Math", id: 2, wordsCount: 101, likes: 56 },
-    { title: "Python snippets", id: 3, wordsCount: 101, likes: 144 },
-    { title: "Capitals of Africa", id: 4, wordsCount: 101, likes: 713 },
-  ]
   const router = useRouter()
   const { data } = useQuery<{ user: IUserData }>(UserRequest.getUserById, { variables: { userId: router.query.userId } })
   const routerLink = async card => {

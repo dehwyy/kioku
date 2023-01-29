@@ -20,8 +20,12 @@ interface IUserQuizCard {
 
 interface IUserCollection {
   likes: string[]
+  _id: string
   collectionName: string
-  quiCards: IUserQuizCard[]
+  quizCards: IUserQuizCard[]
+  theme: string
+  author: string
+  authorId: string
 }
 
 interface IUserData {

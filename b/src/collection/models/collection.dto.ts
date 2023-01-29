@@ -1,4 +1,4 @@
-import { ArgsType, Field } from '@nestjs/graphql'
+import { ArgsType, Field, ID } from '@nestjs/graphql'
 import {
   ICollectionBase,
   IUpdateQuizCardRequest,
@@ -11,6 +11,15 @@ export class CreateCollectionDTO implements ICollectionBase<string> {
 
   @Field(type => [String])
   quizCards: string[]
+
+  @Field(type => String)
+  creator: string
+
+  @Field(type => ID)
+  creatorId: string
+
+  @Field()
+  theme: string
 }
 
 @ArgsType()

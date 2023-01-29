@@ -1,7 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose'
-import CardDB from '@src/card/models/card.schema'
 import QuizCardDB from '@src/quizCard/models/quizCard.schema'
-import mongoose from 'mongoose'
+import * as mongoose from 'mongoose'
 import CollectionDB from '@src/collection/models/collection.schema'
 import { UserExtraDB, UserBasicData } from '@src/user/models/user.interfaces'
 
@@ -15,13 +14,6 @@ export default class UserDB implements UserExtraDB, UserBasicData {
 
   @Prop({ isRequired: true })
   password: string
-
-  @Prop({
-    type: [
-      { type: mongoose.Types.ObjectId, ref: () => CardDB, required: false },
-    ],
-  })
-  cards: CardDB[]
 
   @Prop({
     type: [

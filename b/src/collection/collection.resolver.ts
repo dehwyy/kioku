@@ -20,7 +20,6 @@ import { JwtAuthGuard } from '@src/auth/auth.guard'
 import CardQL from '@src/card/models/card.model'
 import { UpdateLikesDTO } from '@src/global/dto/like.dto'
 
-@UseGuards(JwtAuthGuard)
 @Resolver(() => CollectionQL)
 export default class CollectionResolver {
   constructor(

@@ -6,7 +6,6 @@ import { UseGuards } from '@nestjs/common'
 import { JwtAuthGuard } from '@src/auth/auth.guard'
 import { UpdateLikesDTO } from '@src/global/dto/like.dto'
 
-@UseGuards(JwtAuthGuard)
 @Resolver(of => CardQL)
 export default class CardResolver {
   constructor(private cardService: CardService) {}

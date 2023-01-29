@@ -2,7 +2,7 @@ import { gql } from "@apollo/client"
 
 const createUser = gql`
   mutation createUser($username: String!, $password: String!, $email: String!) {
-    register(username: $username, email: $email, password: $password, cards: [], quizCards: [], collections: []) {
+    register(username: $username, email: $email, password: $password, quizCards: [], collections: []) {
       token
       user {
         _id
@@ -28,20 +28,22 @@ const getUserById = gql`
       email
       username
       collections {
+        _id
         likes
         collectionName
         quizCards {
           _id
           quizCardName
           likes
-          cards {
-            _id
-          }
         }
       }
       quizCards {
+        _id
         likes
         quizCardName
+        cards {
+          _id
+        }
       }
     }
   }

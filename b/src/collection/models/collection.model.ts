@@ -16,6 +16,15 @@ export default class CollectionQL
   @Field(type => [QuizCardQL], { nullable: 'items' })
   quizCards: QuizCardQL[]
 
+  @Field(type => String)
+  creator: string
+
+  @Field(type => ID)
+  creatorId: string
+
+  @Field(type => String)
+  theme: string
+
   @Field(type => [String])
   likes: string[]
 }

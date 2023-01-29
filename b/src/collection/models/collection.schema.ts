@@ -7,10 +7,19 @@ import { IModelWithLikesDB } from '@src/global/types/like'
 
 @Schema({ collection: 'collections' })
 export default class CollectionDB
-  implements IModelWithLikesDB<ICollectionBase<QuizCardDB>>
+  implements IModelWithLikesDB<ICollectionBase<QuizCardDB, UserDB>>
 {
   @Prop({ isRequired: true })
   collectionName: string
+
+  @Prop({ isRequired: true })
+  creator: string
+
+  @Prop({ type: mongoose.Types.ObjectId, ref: 'users' })
+  creatorId: UserDB
+
+  @Prop({ isRequired: true })
+  theme: string
 
   @Prop({ type: [{ type: mongoose.Types.ObjectId, ref: () => QuizCardDB }] })
   quizCards: QuizCardDB[]
