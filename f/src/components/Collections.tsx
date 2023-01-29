@@ -3,18 +3,15 @@ import { Box, Button, Grid, Typography } from "@mui/material"
 import localFont from "@next/font/local"
 import { useRouter } from "next/router"
 import { Forward } from "@mui/icons-material"
-import { useQuery } from "@apollo/client"
-import { UserRequest } from "../gql/user.gql"
 
 const LogoFont = localFont({ src: "../fonts/galey-r.ttf" })
 const FieldFont = localFont({ src: "../fonts/gp-reg.otf" })
 const AuthorFont = localFont({ src: "../fonts/gravitica.otf" })
-const Collections = () => {
+const Collections = ({ collections }: { collections: IUserCollection[] }) => {
   const router = useRouter()
-  const { data } = useQuery<{ user: IUserData }>(UserRequest.getUserById, { variables: { userId: router.query.userId } })
   return (
     <Grid container rowSpacing="5px" columnSpacing="5px" gap="50px 50px" justifyContent="center" data-cy="collectionsWrapper">
-      {data.user.collections.map(collection => (
+      {collections.map(collection => (
         <Grid display="flex" flexDirection="column" justifyContent="space-between" p="10px" item key={collection._id} xs={5} height="200px" style={{ border: "2px solid black", boxShadow: "2px 2px 1px #222222", borderRadius: "5px", backgroundColor: "rgba(255, 255, 255, 1)" }}>
           <Typography align="center" style={{ ...LogoFont.style, textDecoration: "underline 2px" }} fontWeight="600" fontSize="1.2rem">
             {collection.collectionName}

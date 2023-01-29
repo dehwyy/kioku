@@ -15,7 +15,8 @@ const profileImage = "https://cdn.icon-icons.com/icons2/2406/PNG/512/user_accoun
 
 const UserId = () => {
   const router = useRouter()
-  const { data } = useQuery(UserRequest.getUserById, { variables: { userId: router.query.userId } })
+  const { data } = useQuery<{ user: IUserData }>(UserRequest.getUserById, { variables: { userId: router.query.userId } })
+  const { quizCards, collections } = data.user
   const [value, setValue] = useState<TabsValuesT>("collections")
   const { ref, styleTransition } = useTransitionHook({ delay: 1500 })
   const handleChange = (event: React.SyntheticEvent, newValue: TabsValuesT) => {
@@ -36,15 +37,15 @@ const UserId = () => {
           </Tabs>
         </Box>
       </Box>
-      {value === "collections" ? <Collections /> : value === "cards" ? <CardsWrapper /> : <>empty</>}
+      {value === "collections" ? <Collections collections={collections} /> : value === "cards" ? <CardsWrapper quizCards={quizCards} /> : <>empty</>}
     </Box>
   )
 }
 export default UserId
 
-export async function getServerSideProps({ req, res, resolvedUrl }) {
+export async function getServerSideProps({ resolvedUrl }) {
   const apolloClient = initializeApollo()
-  await apolloClient.query({
+  const { data } = await apolloClient.query({
     query: UserRequest.getUserById,
     variables: {
       userId: resolvedUrl.split("/").at(-1),

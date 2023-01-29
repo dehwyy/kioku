@@ -9,9 +9,8 @@ import { UserRequest } from "../gql/user.gql"
 const TitleFont = localFont({ src: "../fonts/galey-r.ttf" })
 const FieldFont = localFont({ src: "../fonts/gp-reg.otf" })
 
-const CardsWrapper = () => {
+const CardsWrapper = ({ quizCards }: { quizCards: IUserQuizCard[] | null }) => {
   const router = useRouter()
-  const { data } = useQuery<{ user: IUserData }>(UserRequest.getUserById, { variables: { userId: router.query.userId } })
   const routerLink = async card => {
     const cardId = card._id
     const url = router.asPath
@@ -19,10 +18,9 @@ const CardsWrapper = () => {
     const link = routerQuery?.quizCardId ? `${url}/${cardId}` : routerQuery?.userId ? `/cards/${cardId}/${cardId}` : `${url}/${cardId}/${cardId}`
     await router.push(link)
   }
-  console.log(data)
   return (
     <Box data-cy="cardsCardsList" display="flex" flexDirection="column" gap="25px">
-      {data.user.quizCards.map(quizCard => (
+      {quizCards.map(quizCard => (
         <Box data-cy="quizCardsItem" key={quizCard._id} p="30px" gap="50px" bgcolor="white" display="flex" justifyContent="space-between" alignItems="center" sx={{ boxShadow: "2px 2px 1px black", border: "2px solid #222222", borderRadius: "5px" }}>
           <Box textAlign="center">
             <Typography style={FieldFont.style}>words: {quizCard.cards.length}</Typography>

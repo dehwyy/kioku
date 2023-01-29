@@ -11,7 +11,7 @@ const Cards = () => {
       <Typography align="center" sx={{ m: "50px 0" }} fontSize="2rem" fontWeight="400" style={FieldFont2.style}>
         Best quiz-cards
       </Typography>
-      <CardsWrapper />
+      <CardsWrapper quizCards={null} />
     </Box>
   )
 }
