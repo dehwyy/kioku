@@ -16,6 +16,7 @@ const RegForm = () => {
     if (!data) return
     const { user, token } = data.register
     localStorage.setItem("token", token)
+    localStorage.setItem("id", user._id)
     return user._id
   }
   return (

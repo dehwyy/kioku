@@ -28,7 +28,7 @@ const DefaultNav = () => {
         </Link>
       </Grid>
       <Grid item>
-        <Link href={"/user/1"}>
+        <Link href={`/user/${localStorage.getItem("id")}`}>
           <Button data-cy="profilePage" startIcon={<Person />}>
             Profile
           </Button>

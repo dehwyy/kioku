@@ -16,6 +16,7 @@ const LoginForm = () => {
       const { data } = await loginUser({ variables: values })
       const { user, token } = data.login
       localStorage.setItem("token", token)
+      localStorage.setItem("id", user._id)
       return user._id
     } catch (e) {
       return
@@ -30,9 +31,9 @@ const LoginForm = () => {
         if (!userId) {
           setError(true)
         } else {
+          await router.push(`/user/${userId}`)
           setSubmitting(false)
           resetForm()
-          await router.push(`/user/${userId}`)
         }
       }}>
       {({ isSubmitting }) =>
